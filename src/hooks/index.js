@@ -7,3 +7,4 @@
  */
 
 export { useTheme } from './useTheme'
+export { useGenderPreference } from './useGenderPreference'
