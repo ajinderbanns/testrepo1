@@ -13,3 +13,13 @@ export {
   isStorageAvailable,
   STORAGE_KEYS,
 } from './storage'
+
+export {
+  saveGenderPreference,
+  loadGenderPreference,
+  clearGenderPreference,
+  isFirstVisit,
+  getGenderPreferenceMetadata,
+  isLocalStorageAvailable,
+  GENDER_STORAGE_KEY,
+} from './localStorage'
