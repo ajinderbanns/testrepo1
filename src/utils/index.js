@@ -23,3 +23,20 @@ export {
   isLocalStorageAvailable,
   GENDER_STORAGE_KEY,
 } from './localStorage'
+
+export {
+  saveProgress,
+  loadProgress,
+  updateModuleCompletion,
+  calculateProgressPercentage,
+  getModuleStatus,
+  unlockAchievement,
+  recordSession,
+  isModuleComplete,
+  isSectionComplete,
+  getLastVisitedLocation,
+  getNextModule,
+  migrateProgressData,
+  clearProgress,
+  initializeProgress,
+} from './progressManager'
