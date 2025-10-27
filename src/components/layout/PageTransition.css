@@ -1,0 +1,33 @@
+/* PageTransition Component Styles */
+.page-transition {
+  width: 100%;
+  min-height: 100%;
+  will-change: transform, opacity, filter;
+  
+  /* Hardware acceleration for smooth 60fps animations */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Prevent layout shift during animations */
+.page-transition > * {
+  transform: translateZ(0);
+}
+
+/* Optimize rendering performance */
+@media (prefers-reduced-motion: no-preference) {
+  .page-transition {
+    /* Enable GPU acceleration */
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none !important;
+    transition: none !important;
+  }
+}
