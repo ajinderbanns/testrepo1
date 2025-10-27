@@ -1,0 +1,129 @@
+/* Footer Component Styles */
+.app-footer {
+  width: 100%;
+  background-color: rgba(26, 26, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  transition: background-color 0.3s ease;
+}
+
+.footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Footer Navigation */
+.footer-nav {
+  width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.footer-link-item {
+  margin: 0;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: #646cff;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #646cff;
+  transition: width 0.2s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Copyright Section */
+.footer-copyright {
+  text-align: center;
+}
+
+.footer-copyright p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    gap: 1.5rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+  }
+
+  .footer-copyright p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 1rem;
+  }
+
+  .footer-links {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Light Mode Support */
+@media (prefers-color-scheme: light) {
+  .app-footer {
+    background-color: rgba(249, 249, 249, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .footer-link {
+    color: rgba(33, 53, 71, 0.7);
+  }
+
+  .footer-link:hover {
+    color: #646cff;
+  }
+
+  .footer-copyright p {
+    color: rgba(33, 53, 71, 0.5);
+  }
+}
