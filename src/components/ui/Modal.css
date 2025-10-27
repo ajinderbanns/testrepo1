@@ -1,0 +1,78 @@
+/* Modal Component Styles */
+
+.ui-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-index-modal-backdrop, 1040);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ui-modal {
+  position: relative;
+  z-index: var(--z-index-modal, 1050);
+  margin: auto;
+}
+
+.ui-modal__header {
+  flex-shrink: 0;
+}
+
+.ui-modal__title {
+  flex: 1;
+}
+
+.ui-modal__close {
+  flex-shrink: 0;
+  line-height: 1;
+  border-radius: var(--radius-medium, 0.5rem);
+}
+
+.ui-modal__close:hover {
+  background-color: var(--color-surface-raised);
+  color: var(--color-text-primary);
+}
+
+.ui-modal__close:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.ui-modal__content {
+  color: var(--color-text-primary);
+}
+
+/* Custom scrollbar for modal content */
+.ui-modal__content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ui-modal__content::-webkit-scrollbar-track {
+  background: var(--color-surface-base);
+}
+
+.ui-modal__content::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 4px;
+}
+
+.ui-modal__content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ui-modal-backdrop {
+    padding: 0.5rem;
+  }
+  
+  .ui-modal__header,
+  .ui-modal__content {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,72 @@
+/* Tooltip Component Styles */
+
+.ui-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ui-tooltip {
+  position: absolute;
+  white-space: pre-wrap;
+  pointer-events: none;
+  line-height: 1.4;
+}
+
+/* Arrow styles for different positions */
+.ui-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.ui-tooltip--top::before {
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-color: var(--color-surface-overlay) transparent transparent transparent;
+}
+
+.ui-tooltip--bottom::before {
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent var(--color-surface-overlay) transparent;
+}
+
+.ui-tooltip--left::before {
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-color: transparent transparent transparent var(--color-surface-overlay);
+}
+
+.ui-tooltip--right::before {
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 6px 6px 0;
+  border-color: transparent var(--color-surface-overlay) transparent transparent;
+}
+
+/* Theme-specific enhancements */
+[data-theme='male'] .ui-tooltip {
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='female'] .ui-tooltip {
+  backdrop-filter: blur(8px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ui-tooltip {
+    max-width: 200px;
+    font-size: 0.8125rem;
+  }
+}

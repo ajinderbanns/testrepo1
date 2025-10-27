@@ -1,0 +1,93 @@
+/* Button Component Styles */
+
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  outline: none;
+  position: relative;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Primary Variant - Theme-specific glow effects */
+[data-theme='male'] .ui-button--primary:hover:not(:disabled) {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(147, 51, 234, 0.4);
+}
+
+[data-theme='female'] .ui-button--primary:hover:not(:disabled) {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 15px rgba(255, 127, 80, 0.3);
+}
+
+/* Secondary Variant */
+[data-theme='male'] .ui-button--secondary:hover:not(:disabled) {
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme='female'] .ui-button--secondary:hover:not(:disabled) {
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 12px rgba(255, 182, 193, 0.3);
+}
+
+/* Tertiary Variant */
+.ui-button--tertiary:hover:not(:disabled) {
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-focus);
+}
+
+/* Loading State */
+.button-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Disabled State */
+.ui-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(30%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ui-button--large {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}

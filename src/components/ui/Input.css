@@ -1,0 +1,77 @@
+/* Input Component Styles */
+
+.ui-input-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.ui-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.ui-input::placeholder {
+  color: var(--color-text-tertiary);
+  opacity: 0.7;
+}
+
+.ui-input:focus {
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+}
+
+[data-theme='male'] .ui-input:focus {
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
+}
+
+[data-theme='female'] .ui-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.15);
+}
+
+.ui-input--error {
+  border-color: var(--color-error) !important;
+}
+
+.ui-input--error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+[data-theme='female'] .ui-input--error:focus {
+  box-shadow: 0 0 0 3px rgba(224, 36, 36, 0.15);
+}
+
+.ui-input__required {
+  color: var(--color-error);
+}
+
+.ui-input__error {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ui-input__helper {
+  line-height: 1.4;
+}
+
+/* Disabled state */
+.ui-input:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-bg-secondary);
+}
+
+/* Autofill styling */
+.ui-input:-webkit-autofill,
+.ui-input:-webkit-autofill:hover,
+.ui-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text-primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+[data-theme='male'] .ui-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px var(--color-surface-base) inset;
+}
+
+[data-theme='female'] .ui-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px var(--color-surface-base) inset;
+}

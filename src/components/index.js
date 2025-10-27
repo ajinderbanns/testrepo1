@@ -1,2 +1,3 @@
 export { default as ProtectedRoute } from './ProtectedRoute'
 export { AppLayout, Header, Footer, PageTransition, pageVariants } from './layout'
+export { Button, Card, Input, Modal, Tooltip, ProgressBar, Badge } from './ui'
