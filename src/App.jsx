@@ -1,25 +1,51 @@
-import { useState } from 'react'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { Landing, Learn, Module1, Module2, Module3 } from './pages'
+import { ProtectedRoute } from './components'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <h1>LLM Education App</h1>
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Vite + React application ready for development
-      </p>
-    </>
+    <Routes>
+      {/* Public route - Landing page with gender selection */}
+      <Route path="/" element={<Landing />} />
+      
+      {/* Protected routes - require gender selection */}
+      <Route
+        path="/learn"
+        element={
+          <ProtectedRoute>
+            <Learn />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/module/1"
+        element={
+          <ProtectedRoute>
+            <Module1 />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/module/2"
+        element={
+          <ProtectedRoute>
+            <Module2 />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/module/3"
+        element={
+          <ProtectedRoute>
+            <Module3 />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   )
 }
 
