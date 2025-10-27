@@ -11,6 +11,38 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Theme transition properties - smooth theme switching */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply smooth transitions to all elements for theme changes */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              fill 0.3s ease,
+              stroke 0.3s ease;
+}
+
+/* Disable transitions for elements that need instant changes */
+.no-transition,
+.no-transition *,
+input,
+textarea,
+select {
+  transition: none !important;
+}
+
+/* Preserve focus and active state transitions */
+button:focus,
+button:active,
+a:focus,
+a:active {
+  transition: all 0.15s ease;
 }
 
 a {
