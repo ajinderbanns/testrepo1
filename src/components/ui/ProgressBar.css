@@ -1,0 +1,81 @@
+/* ProgressBar Component Styles */
+
+.ui-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui-progress-track {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ui-progress-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient effect for male theme */
+[data-theme='male'] .ui-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Subtle shine for female theme */
+[data-theme='female'] .ui-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ui-progress-label {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Circular variant */
+.ui-progress--circular {
+  display: inline-flex;
+}
+
+.ui-progress-label--circular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glow effect on circular progress */
+[data-theme='male'] .ui-progress--circular svg circle:last-child {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+[data-theme='female'] .ui-progress--circular svg circle:last-child {
+  filter: drop-shadow(0 0 3px currentColor);
+}
