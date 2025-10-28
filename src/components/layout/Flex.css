@@ -1,0 +1,206 @@
+/**
+ * Flex Styles
+ * 
+ * Flexbox layout with alignment, justification, and spacing controls.
+ */
+
+.flex {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.flex-inline {
+  display: inline-flex;
+  box-sizing: border-box;
+}
+
+/* Direction Variants */
+.flex--direction-row {
+  flex-direction: row;
+}
+
+.flex--direction-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex--direction-column {
+  flex-direction: column;
+}
+
+.flex--direction-column-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Alignment Variants - Cross Axis */
+.flex--align-flex-start {
+  align-items: flex-start;
+}
+
+.flex--align-center {
+  align-items: center;
+}
+
+.flex--align-flex-end {
+  align-items: flex-end;
+}
+
+.flex--align-stretch {
+  align-items: stretch;
+}
+
+.flex--align-baseline {
+  align-items: baseline;
+}
+
+/* Justify Variants - Main Axis */
+.flex--justify-flex-start {
+  justify-content: flex-start;
+}
+
+.flex--justify-center {
+  justify-content: center;
+}
+
+.flex--justify-flex-end {
+  justify-content: flex-end;
+}
+
+.flex--justify-space-between {
+  justify-content: space-between;
+}
+
+.flex--justify-space-around {
+  justify-content: space-around;
+}
+
+.flex--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+/* Gap Variants */
+.flex--gap-xxs {
+  gap: var(--spacing-xxs, 0.25rem);
+}
+
+.flex--gap-xs {
+  gap: var(--spacing-xs, 0.5rem);
+}
+
+.flex--gap-sm {
+  gap: var(--spacing-sm, 0.75rem);
+}
+
+.flex--gap-md {
+  gap: var(--spacing-md, 1rem);
+}
+
+.flex--gap-lg {
+  gap: var(--spacing-lg, 1.5rem);
+}
+
+.flex--gap-xl {
+  gap: var(--spacing-xl, 2rem);
+}
+
+.flex--gap-xxl {
+  gap: var(--spacing-xxl, 3rem);
+}
+
+.flex--gap-xxxl {
+  gap: var(--spacing-xxxl, 4rem);
+}
+
+/* Wrap Support */
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   Flex Item Utilities
+   ============================================ */
+
+/* Can be applied to direct children for fine control */
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+/* Grow utilities */
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+/* Shrink utilities */
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+/* Basis utilities */
+.flex-basis-0 {
+  flex-basis: 0;
+}
+
+.flex-basis-auto {
+  flex-basis: auto;
+}
+
+.flex-basis-full {
+  flex-basis: 100%;
+}
+
+/* Order utilities */
+.order-first {
+  order: -9999;
+}
+
+.order-last {
+  order: 9999;
+}
+
+.order-none {
+  order: 0;
+}
+
+/* Individual alignment overrides */
+.self-auto {
+  align-self: auto;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+.self-baseline {
+  align-self: baseline;
+}

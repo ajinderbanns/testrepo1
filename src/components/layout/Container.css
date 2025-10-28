@@ -1,0 +1,121 @@
+/**
+ * Container Styles
+ * 
+ * Responsive container with max-width constraints and horizontal padding.
+ */
+
+.container {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Centering */
+.container--centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Size Variants - Max Width */
+.container--xs {
+  max-width: 640px;
+}
+
+.container--sm {
+  max-width: 768px;
+}
+
+.container--default,
+.container--md {
+  max-width: 1024px;
+}
+
+.container--lg {
+  max-width: 1280px;
+}
+
+.container--xl {
+  max-width: 1536px;
+}
+
+.container--xxl {
+  max-width: 1920px;
+}
+
+.container--full {
+  max-width: 100%;
+}
+
+/* Fluid container ignores max-width */
+.container--fluid {
+  max-width: none !important;
+}
+
+/* Padding Variants */
+.container--padding-none {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.container--padding-xs {
+  padding-left: var(--spacing-xs, 0.5rem);
+  padding-right: var(--spacing-xs, 0.5rem);
+}
+
+.container--padding-sm {
+  padding-left: var(--spacing-sm, 0.75rem);
+  padding-right: var(--spacing-sm, 0.75rem);
+}
+
+.container--padding-default,
+.container--padding-md {
+  padding-left: var(--spacing-md, 1rem);
+  padding-right: var(--spacing-md, 1rem);
+}
+
+.container--padding-lg {
+  padding-left: var(--spacing-lg, 1.5rem);
+  padding-right: var(--spacing-lg, 1.5rem);
+}
+
+.container--padding-xl {
+  padding-left: var(--spacing-xl, 2rem);
+  padding-right: var(--spacing-xl, 2rem);
+}
+
+/* Responsive Padding - Increase on larger screens */
+@media (min-width: 768px) {
+  .container--padding-default,
+  .container--padding-md {
+    padding-left: var(--spacing-lg, 1.5rem);
+    padding-right: var(--spacing-lg, 1.5rem);
+  }
+  
+  .container--padding-lg {
+    padding-left: var(--spacing-xl, 2rem);
+    padding-right: var(--spacing-xl, 2rem);
+  }
+  
+  .container--padding-xl {
+    padding-left: var(--spacing-xxl, 3rem);
+    padding-right: var(--spacing-xxl, 3rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container--padding-default,
+  .container--padding-md {
+    padding-left: var(--spacing-xl, 2rem);
+    padding-right: var(--spacing-xl, 2rem);
+  }
+  
+  .container--padding-lg {
+    padding-left: var(--spacing-xxl, 3rem);
+    padding-right: var(--spacing-xxl, 3rem);
+  }
+  
+  .container--padding-xl {
+    padding-left: var(--spacing-xxxl, 4rem);
+    padding-right: var(--spacing-xxxl, 4rem);
+  }
+}

@@ -1,0 +1,147 @@
+/**
+ * Stack Styles
+ * 
+ * Vertical layout with flexbox and configurable gap spacing.
+ */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Gap Variants */
+.stack--gap-none {
+  gap: 0;
+}
+
+.stack--gap-xxs {
+  gap: var(--spacing-xxs, 0.25rem);
+}
+
+.stack--gap-xs {
+  gap: var(--spacing-xs, 0.5rem);
+}
+
+.stack--gap-sm {
+  gap: var(--spacing-sm, 0.75rem);
+}
+
+.stack--gap-md {
+  gap: var(--spacing-md, 1rem);
+}
+
+.stack--gap-lg {
+  gap: var(--spacing-lg, 1.5rem);
+}
+
+.stack--gap-xl {
+  gap: var(--spacing-xl, 2rem);
+}
+
+.stack--gap-xxl {
+  gap: var(--spacing-xxl, 3rem);
+}
+
+.stack--gap-xxxl {
+  gap: var(--spacing-xxxl, 4rem);
+}
+
+/* Alignment Variants - Horizontal */
+.stack--align-flex-start {
+  align-items: flex-start;
+}
+
+.stack--align-center {
+  align-items: center;
+}
+
+.stack--align-flex-end {
+  align-items: flex-end;
+}
+
+.stack--align-stretch {
+  align-items: stretch;
+}
+
+.stack--align-baseline {
+  align-items: baseline;
+}
+
+/* Justify Variants - Vertical */
+.stack--justify-flex-start {
+  justify-content: flex-start;
+}
+
+.stack--justify-center {
+  justify-content: center;
+}
+
+.stack--justify-flex-end {
+  justify-content: flex-end;
+}
+
+.stack--justify-space-between {
+  justify-content: space-between;
+}
+
+.stack--justify-space-around {
+  justify-content: space-around;
+}
+
+.stack--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+/* Wrap Support */
+.stack--wrap {
+  flex-wrap: wrap;
+}
+
+/* Dividers */
+.stack--dividers > * + * {
+  border-top: 1px solid var(--stack-divider-color, var(--color-border-default, #e5e5e5));
+  padding-top: inherit;
+}
+
+/* Remove gap when using dividers (padding handles spacing) */
+.stack--dividers.stack--gap-none > * + * {
+  padding-top: 0;
+}
+
+.stack--dividers.stack--gap-xxs > * + * {
+  padding-top: var(--spacing-xxs, 0.25rem);
+}
+
+.stack--dividers.stack--gap-xs > * + * {
+  padding-top: var(--spacing-xs, 0.5rem);
+}
+
+.stack--dividers.stack--gap-sm > * + * {
+  padding-top: var(--spacing-sm, 0.75rem);
+}
+
+.stack--dividers.stack--gap-md > * + * {
+  padding-top: var(--spacing-md, 1rem);
+}
+
+.stack--dividers.stack--gap-lg > * + * {
+  padding-top: var(--spacing-lg, 1.5rem);
+}
+
+.stack--dividers.stack--gap-xl > * + * {
+  padding-top: var(--spacing-xl, 2rem);
+}
+
+.stack--dividers.stack--gap-xxl > * + * {
+  padding-top: var(--spacing-xxl, 3rem);
+}
+
+.stack--dividers.stack--gap-xxxl > * + * {
+  padding-top: var(--spacing-xxxl, 4rem);
+}
+
+/* Reset gap for dividers to avoid double spacing */
+.stack--dividers {
+  gap: 0;
+}

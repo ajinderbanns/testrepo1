@@ -1,0 +1,379 @@
+/**
+ * Typography System
+ * 
+ * Fluid type scales using CSS clamp() for smooth responsive scaling.
+ * Scales smoothly from mobile (320px) to ultrawide (1920px+) without breakpoint jumps.
+ * 
+ * Features:
+ * - Fluid font sizes using clamp(min, preferred, max)
+ * - Cinematic hierarchy with generous spacing
+ * - Theme-aware typography (adapts to male/female themes)
+ * - Accessible and readable at all viewport sizes
+ * 
+ * Usage:
+ * Apply utility classes (.h1, .h2, .body-large, etc.) to elements
+ * or use CSS custom properties in your components.
+ */
+
+/* ============================================
+   CSS Custom Properties - Fluid Type Scale
+   ============================================ */
+
+:root {
+  /* Display Typography (Hero sections) */
+  --font-size-display: clamp(3rem, 6vw + 1rem, 5.5rem); /* 48px → 88px */
+  
+  /* Heading Scales - Cinematic hierarchy */
+  --font-size-h1: clamp(2rem, 4vw + 1rem, 4rem);       /* 32px → 64px */
+  --font-size-h2: clamp(1.5rem, 3vw + 0.75rem, 3rem);  /* 24px → 48px */
+  --font-size-h3: clamp(1.25rem, 2vw + 0.75rem, 2.25rem); /* 20px → 36px */
+  --font-size-h4: clamp(1.125rem, 1.5vw + 0.5rem, 1.875rem); /* 18px → 30px */
+  --font-size-h5: clamp(1rem, 1vw + 0.5rem, 1.5rem);   /* 16px → 24px */
+  --font-size-h6: clamp(0.875rem, 0.75vw + 0.5rem, 1.25rem); /* 14px → 20px */
+  
+  /* Body Text Scales */
+  --font-size-body-large: clamp(1.125rem, 0.5vw + 1rem, 1.375rem); /* 18px → 22px */
+  --font-size-body: clamp(1rem, 0.25vw + 0.875rem, 1.125rem);      /* 16px → 18px */
+  --font-size-body-small: clamp(0.875rem, 0.25vw + 0.75rem, 1rem); /* 14px → 16px */
+  
+  /* UI Text Scales */
+  --font-size-caption: clamp(0.75rem, 0.25vw + 0.625rem, 0.875rem); /* 12px → 14px */
+  --font-size-tiny: clamp(0.625rem, 0.125vw + 0.5rem, 0.75rem);     /* 10px → 12px */
+  
+  /* Font Families - Theme aware */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-secondary: 'Poppins', 'Inter', sans-serif;
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Line Heights - Optimized for readability */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter Spacing - Cinematic feel */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* ============================================
+   Heading Styles
+   ============================================ */
+
+/* Display / Hero Heading */
+.display,
+.text-display {
+  font-size: var(--font-size-display);
+  font-family: var(--font-family-secondary);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--spacing-xl, 2rem) 0;
+}
+
+/* H1 - Page Titles */
+h1,
+.h1 {
+  font-size: var(--font-size-h1);
+  font-family: var(--font-family-secondary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--spacing-lg, 1.5rem) 0;
+}
+
+/* H2 - Section Headers */
+h2,
+.h2 {
+  font-size: var(--font-size-h2);
+  font-family: var(--font-family-secondary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--spacing-md, 1rem) 0;
+}
+
+/* H3 - Subsection Headers */
+h3,
+.h3 {
+  font-size: var(--font-size-h3);
+  font-family: var(--font-family-secondary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-md, 1rem) 0;
+}
+
+/* H4 - Card Titles */
+h4,
+.h4 {
+  font-size: var(--font-size-h4);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-sm, 0.75rem) 0;
+}
+
+/* H5 - Small Headings */
+h5,
+.h5 {
+  font-size: var(--font-size-h5);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-sm, 0.75rem) 0;
+}
+
+/* H6 - Tiny Headings */
+h6,
+.h6 {
+  font-size: var(--font-size-h6);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  margin: 0 0 var(--spacing-xs, 0.5rem) 0;
+}
+
+/* ============================================
+   Body Text Styles
+   ============================================ */
+
+/* Body Large - Introduction text, leads */
+.body-large,
+.text-large {
+  font-size: var(--font-size-body-large);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-md, 1rem) 0;
+}
+
+/* Body - Standard text */
+body,
+p,
+.body,
+.text-body {
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-md, 1rem) 0;
+}
+
+/* Body Small - Secondary information */
+.body-small,
+.text-small {
+  font-size: var(--font-size-body-small);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-sm, 0.75rem) 0;
+}
+
+/* Caption - Labels, metadata */
+.caption,
+.text-caption {
+  font-size: var(--font-size-caption);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  margin: 0 0 var(--spacing-xs, 0.5rem) 0;
+}
+
+/* Tiny - Fine print, legal */
+.tiny,
+.text-tiny {
+  font-size: var(--font-size-tiny);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin: 0 0 var(--spacing-xs, 0.5rem) 0;
+}
+
+/* ============================================
+   Text Utilities
+   ============================================ */
+
+/* Font Weight Utilities */
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.font-extrabold { font-weight: var(--font-weight-extrabold); }
+
+/* Font Family Utilities */
+.font-primary { font-family: var(--font-family-primary); }
+.font-secondary { font-family: var(--font-family-secondary); }
+.font-mono { font-family: var(--font-family-mono); }
+
+/* Line Height Utilities */
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-snug { line-height: var(--line-height-snug); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+.leading-loose { line-height: var(--line-height-loose); }
+
+/* Letter Spacing Utilities */
+.tracking-tighter { letter-spacing: var(--letter-spacing-tighter); }
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
+.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+.tracking-widest { letter-spacing: var(--letter-spacing-widest); }
+
+/* Text Transform Utilities */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* Text Alignment Utilities */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Text Decoration Utilities */
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* ============================================
+   Responsive Typography Optimizations
+   ============================================ */
+
+/* Optimize for small mobile devices */
+@media (max-width: 480px) {
+  /* Reduce margins for compact layouts */
+  h1, .h1 { margin-bottom: var(--spacing-md, 1rem); }
+  h2, .h2 { margin-bottom: var(--spacing-sm, 0.75rem); }
+  p, .body { margin-bottom: var(--spacing-sm, 0.75rem); }
+}
+
+/* Optimize for tablets and above */
+@media (min-width: 768px) {
+  /* Increase margins for more whitespace */
+  .display { margin-bottom: var(--spacing-xxl, 3rem); }
+  h1, .h1 { margin-bottom: var(--spacing-xl, 2rem); }
+  h2, .h2 { margin-bottom: var(--spacing-lg, 1.5rem); }
+}
+
+/* Optimize for desktop and above */
+@media (min-width: 1024px) {
+  /* Maximum cinematic spacing */
+  .display { margin-bottom: var(--spacing-xxxl, 4rem); }
+  h1, .h1 { margin-bottom: var(--spacing-xxl, 3rem); }
+}
+
+/* ============================================
+   Maximum Line Length for Readability
+   ============================================ */
+
+/* Limit line length for optimal readability (45-75 characters) */
+.prose,
+.readable {
+  max-width: 65ch; /* ~65 characters per line */
+}
+
+.prose-wide,
+.readable-wide {
+  max-width: 80ch; /* ~80 characters per line */
+}
+
+.prose-narrow,
+.readable-narrow {
+  max-width: 50ch; /* ~50 characters per line */
+}
+
+/* ============================================
+   Theme-Specific Typography Adjustments
+   ============================================ */
+
+/* Male Theme - Slightly tighter, more dramatic */
+[data-theme="male"] {
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-tighter: -0.06em;
+}
+
+/* Female Theme - Slightly wider, more airy */
+[data-theme="female"] {
+  --letter-spacing-normal: 0.01em;
+  --letter-spacing-wide: 0.03em;
+}
+
+/* ============================================
+   Cinematic Enhancements
+   ============================================ */
+
+/* Drop cap for editorial content */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 3.5em;
+  line-height: 0.85;
+  margin: 0.1em 0.1em 0 0;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Highlighted text */
+.highlight {
+  position: relative;
+  display: inline;
+  padding: 0.125em 0.25em;
+  background: linear-gradient(
+    to right,
+    var(--color-primary-main, #9333EA) 0%,
+    var(--color-accent-main, #EC4899) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Quote styling */
+blockquote {
+  font-size: var(--font-size-body-large);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  margin: var(--spacing-xl, 2rem) 0;
+  padding-left: var(--spacing-lg, 1.5rem);
+  border-left: 4px solid var(--color-primary-main, #9333EA);
+}
+
+/* Code styling */
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-small, 0.25rem);
+  background-color: var(--color-surface-raised, rgba(0, 0, 0, 0.1));
+}
+
+pre code {
+  display: block;
+  padding: var(--spacing-md, 1rem);
+  overflow-x: auto;
+}
