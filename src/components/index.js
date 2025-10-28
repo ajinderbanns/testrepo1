@@ -3,3 +3,5 @@ export { AppLayout, Header, Footer, PageTransition, pageVariants } from './layou
 export { Button, Card, Input, Modal, Tooltip, ProgressBar, Badge } from './ui'
 export { GenderSelection, ThemePreview, OnboardingFlow } from './onboarding'
 export { ProgressBar as ProgressBarEnhanced, CircularProgress, ModuleStatus, MilestoneAnimation } from './progress'
+export { default as ContinueLearning } from './ContinueLearning'
+export { default as ResetProgress } from './settings/ResetProgress'
