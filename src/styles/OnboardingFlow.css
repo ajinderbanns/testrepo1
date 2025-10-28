@@ -1,0 +1,23 @@
+/**
+ * OnboardingFlow Component Styles
+ * 
+ * Container for the multi-step onboarding experience.
+ * Ensures smooth transitions between steps.
+ */
+
+.onboarding-flow {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure proper stacking of animated pages */
+.onboarding-flow > div {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Support for smooth page transitions */
+.onboarding-flow {
+  overflow-x: hidden;
+}

@@ -1,0 +1,466 @@
+/**
+ * ThemePreview Component Styles
+ * 
+ * Full-screen immersive preview showing selected theme applied to sample content.
+ * Features smooth animations, responsive layout, and authentic representation.
+ */
+
+/* ===========================
+   Container & Layout
+   =========================== */
+
+.theme-preview {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: background-color 0.6s ease;
+}
+
+.theme-preview__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.theme-preview__gradient-orb {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+.theme-preview__gradient-orb--1 {
+  top: -100px;
+  left: -100px;
+}
+
+.theme-preview__gradient-orb--2 {
+  top: 50%;
+  right: -150px;
+  transform: translateY(-50%);
+}
+
+.theme-preview__gradient-orb--3 {
+  bottom: -100px;
+  left: 30%;
+}
+
+.theme-preview__container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===========================
+   Header
+   =========================== */
+
+.theme-preview__header {
+  margin-bottom: 3rem;
+}
+
+.theme-preview__back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+}
+
+.theme-preview__back-button:hover {
+  transform: translateX(-4px);
+  opacity: 0.8;
+}
+
+.theme-preview__back-button:active {
+  transform: translateX(-2px);
+}
+
+.theme-preview__back-button svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.theme-preview__back-button:hover svg {
+  transform: translateX(-2px);
+}
+
+.theme-preview__header-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.theme-preview__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.theme-preview__subtitle {
+  font-size: 1.125rem;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .theme-preview__title {
+    font-size: 2rem;
+  }
+  
+  .theme-preview__subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* ===========================
+   Content Area
+   =========================== */
+
+.theme-preview__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* ===========================
+   Sample Module Card
+   =========================== */
+
+.theme-preview__sample-card {
+  width: 100%;
+}
+
+.preview-module-card {
+  width: 100%;
+}
+
+.preview-module-card__header {
+  margin-bottom: 2rem;
+}
+
+.preview-module-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-module-badge {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.preview-module-card__duration {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.preview-module-card__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.preview-module-card__description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .preview-module-card__title {
+    font-size: 1.5rem;
+  }
+  
+  .preview-module-card__description {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ===========================
+   Sample Visualization
+   =========================== */
+
+.preview-visualization {
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  margin: 1.5rem 0;
+  border: 1px solid;
+  transition: all 0.3s ease;
+}
+
+.preview-visualization__content {
+  text-align: center;
+}
+
+.preview-visualization__svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.preview-visualization__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .preview-visualization {
+    padding: 2rem 1rem;
+  }
+}
+
+/* ===========================
+   Sample Actions
+   =========================== */
+
+.preview-module-card__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.preview-module-card__actions button {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .preview-module-card__actions {
+    flex-direction: column;
+  }
+  
+  .preview-module-card__actions button {
+    width: 100%;
+  }
+}
+
+/* ===========================
+   Typography Samples
+   =========================== */
+
+.theme-preview__typography-samples {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Desktop: Side by side */
+@media (min-width: 768px) {
+  .theme-preview__typography-samples {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+.typography-sample {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.typography-sample__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.typography-sample__heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.typography-sample__text {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .typography-sample__heading {
+    font-size: 1.5rem;
+  }
+  
+  .typography-sample__text {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ===========================
+   Footer / Confirmation
+   =========================== */
+
+.theme-preview__footer {
+  border-top: 1px solid;
+  padding-top: 2rem;
+  margin-top: auto;
+}
+
+.theme-preview__footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.theme-preview__footer-text {
+  flex: 1;
+  min-width: 250px;
+}
+
+.theme-preview__footer-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.theme-preview__footer-description {
+  font-size: 0.9375rem;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.theme-preview__confirm-button {
+  flex-shrink: 0;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+  .theme-preview__footer-content {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .theme-preview__footer-text {
+    min-width: 100%;
+  }
+  
+  .theme-preview__confirm-button {
+    width: 100%;
+  }
+  
+  .theme-preview__footer-title {
+    font-size: 1.25rem;
+  }
+  
+  .theme-preview__footer-description {
+    font-size: 0.875rem;
+  }
+}
+
+/* ===========================
+   Accessibility
+   =========================== */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-preview__gradient-orb {
+    animation: none !important;
+  }
+  
+  .theme-preview__back-button:hover {
+    transform: none;
+  }
+  
+  .theme-preview__back-button:hover svg {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-preview__back-button {
+    border-width: 2px;
+  }
+  
+  .preview-visualization {
+    border-width: 2px;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.theme-preview__back-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ===========================
+   Dark Theme Adjustments
+   =========================== */
+
+/* When male theme is active (dark background) */
+[data-theme="male"] .theme-preview__typography-samples {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* When female theme is active (light background) */
+[data-theme="female"] .theme-preview__typography-samples {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ===========================
+   Animations
+   =========================== */
+
+/* Smooth entrance for all interactive elements */
+.theme-preview button,
+.theme-preview .ui-card {
+  will-change: transform;
+}
+
+/* Optimize performance */
+.theme-preview__background,
+.theme-preview__gradient-orb {
+  will-change: transform;
+  backface-visibility: hidden;
+}
