@@ -1,0 +1,266 @@
+/**
+ * TextGeneration Visualization Styles
+ * 
+ * Additional CSS for responsive design and animation optimizations.
+ * Theme-specific colors are handled via inline styles in the component.
+ */
+
+/* Base container optimizations */
+.text-generation-viz {
+  position: relative;
+  will-change: transform, opacity;
+}
+
+/* Token display optimizations */
+.token-display {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth animations */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: cursorBlink 0.8s infinite;
+}
+
+/* Responsive design - Tablet */
+@media (max-width: 768px) {
+  .text-generation-viz {
+    padding: 1.5rem !important;
+  }
+
+  .text-generation-viz h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .example-selector {
+    gap: 0.5rem !important;
+  }
+
+  .example-selector button {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0.75rem !important;
+    min-width: 80px !important;
+  }
+
+  .prompt-container,
+  .output-container {
+    padding: 1rem !important;
+  }
+
+  .output-container {
+    min-height: 150px !important;
+  }
+
+  .controls-container {
+    gap: 0.5rem !important;
+  }
+
+  .controls-container button {
+    min-width: 80px !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+}
+
+/* Responsive design - Mobile */
+@media (max-width: 480px) {
+  .text-generation-viz {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .text-generation-viz h2 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .text-generation-viz p {
+    font-size: 0.875rem !important;
+  }
+
+  .example-selector {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .example-selector button {
+    width: 100%;
+    min-width: 100% !important;
+  }
+
+  .prompt-container,
+  .output-container {
+    padding: 0.75rem !important;
+  }
+
+  .output-container {
+    min-height: 120px !important;
+    font-size: 0.875rem !important;
+  }
+
+  .controls-container {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.5rem !important;
+  }
+
+  .controls-container button {
+    width: 100%;
+    min-width: 100% !important;
+  }
+
+  .token-count {
+    order: -1; /* Move to top on mobile */
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Smaller probability indicators on mobile */
+  .probability-indicator {
+    font-size: 0.625rem !important;
+    padding: 0.125rem 0.25rem !important;
+    top: -16px !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .controls-container button {
+    min-height: 44px; /* iOS recommended minimum touch target */
+  }
+
+  .example-selector button {
+    min-height: 44px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .text-generation-viz,
+  .text-generation-viz *,
+  .token-display {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .typing-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-generation-viz {
+    border-width: 2px !important;
+  }
+
+  .prompt-container {
+    border-width: 2px !important;
+  }
+
+  .controls-container button {
+    border-width: 2px !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .controls-container,
+  .example-selector,
+  .progress-bar,
+  .probability-indicator,
+  .typing-cursor {
+    display: none !important;
+  }
+
+  .text-generation-viz {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    page-break-inside: avoid;
+  }
+
+  .output-container {
+    min-height: auto !important;
+  }
+}
+
+/* Focus states for accessibility */
+.controls-container button:focus-visible,
+.example-selector button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Performance optimization: GPU acceleration */
+.token-display,
+.typing-cursor,
+.probability-indicator {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Smooth scrolling for overflow content */
+.output-container {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+/* Custom scrollbar styling (optional, theme-aware) */
+.output-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.output-container::-webkit-scrollbar-thumb {
+  background: var(--color-border-default, rgba(0, 0, 0, 0.2));
+  border-radius: 4px;
+}
+
+.output-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-dark, rgba(0, 0, 0, 0.3));
+}
+
+/* Loading state skeleton (if needed in future) */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary, #f0f0f0) 0%,
+    var(--color-bg-tertiary, #e0e0e0) 50%,
+    var(--color-bg-secondary, #f0f0f0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .output-container::-webkit-scrollbar-thumb {
+    background: var(--color-border-light, rgba(255, 255, 255, 0.2));
+  }
+
+  .output-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-default, rgba(255, 255, 255, 0.3));
+  }
+}
