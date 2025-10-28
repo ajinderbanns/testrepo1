@@ -48,3 +48,11 @@ export {
   getNextIncompleteSection,
   hasStartedLearning,
 } from './progressHelpers'
+
+export {
+  saveWalkthroughCompleted,
+  isWalkthroughCompleted,
+  resetWalkthrough,
+  getWalkthroughMetadata,
+  WALKTHROUGH_STORAGE_KEY,
+} from './walkthroughStorage'
