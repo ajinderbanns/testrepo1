@@ -1,0 +1,497 @@
+/**
+ * GenderSelection Component Styles
+ * 
+ * Visual theme preview cards with hover and selection animations.
+ * Responsive layout: stacked on mobile, side-by-side on desktop.
+ */
+
+/* ===========================
+   Container & Layout
+   =========================== */
+
+.gender-selection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.gender-selection__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gender-selection__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  background: linear-gradient(135deg, #9333EA 0%, #3B82F6 50%, #FF7F50 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.gender-selection__subtitle {
+  font-size: 1.125rem;
+  color: #8B7D77;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.9;
+}
+
+.gender-selection__info-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(139, 125, 119, 0.3);
+  border-radius: 2rem;
+  color: #8B7D77;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gender-selection__info-button:hover {
+  border-color: rgba(139, 125, 119, 0.6);
+  background: rgba(139, 125, 119, 0.05);
+  transform: translateY(-1px);
+}
+
+.gender-selection__info-button svg {
+  flex-shrink: 0;
+}
+
+.gender-selection__info-text {
+  font-weight: 500;
+}
+
+/* ===========================
+   Cards Grid
+   =========================== */
+
+.gender-selection__cards {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+/* Desktop: Side by side */
+@media (min-width: 768px) {
+  .gender-selection__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* ===========================
+   Card Base Styles
+   =========================== */
+
+.gender-selection__card {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.gender-selection__card:focus {
+  outline: 3px solid rgba(147, 51, 234, 0.5);
+  outline-offset: 2px;
+}
+
+.gender-selection__card:active {
+  transform: scale(0.98);
+}
+
+/* Selected state */
+.gender-selection__card--selected {
+  cursor: default;
+  border-color: currentColor;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Male theme card */
+.gender-selection__card--male {
+  border-color: rgba(147, 51, 234, 0.2);
+}
+
+.gender-selection__card--male.gender-selection__card--selected {
+  border-color: #9333EA;
+}
+
+/* Female theme card */
+.gender-selection__card--female {
+  border-color: rgba(255, 127, 80, 0.2);
+}
+
+.gender-selection__card--female.gender-selection__card--selected {
+  border-color: #FF7F50;
+}
+
+/* ===========================
+   Card Glow Effect
+   =========================== */
+
+.gender-selection__card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.3;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.gender-selection__card-glow--male {
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.4) 0%, transparent 70%);
+}
+
+.gender-selection__card-glow--female {
+  background: radial-gradient(circle, rgba(255, 127, 80, 0.4) 0%, transparent 70%);
+}
+
+/* ===========================
+   Card Content
+   =========================== */
+
+.gender-selection__card-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* ===========================
+   Theme Preview Section
+   =========================== */
+
+.gender-selection__preview {
+  position: relative;
+  height: 200px;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.gender-selection__preview-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Male theme preview background */
+.gender-selection__preview-bg--male {
+  background: linear-gradient(135deg, #9333EA 0%, #6B21A8 25%, #3B82F6 50%, #EC4899 75%, #F97316 100%);
+  animation: euphoriaShift 10s ease infinite;
+}
+
+@keyframes euphoriaShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Female theme preview background */
+.gender-selection__preview-bg--female {
+  background: linear-gradient(135deg, #FFD93D 0%, #FF9A76 25%, #FF7F50 50%, #FFB6C1 75%, #FFDAB9 100%);
+  animation: sunsetShift 10s ease infinite;
+}
+
+@keyframes sunsetShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ===========================
+   Color Swatches
+   =========================== */
+
+.gender-selection__swatches {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gender-selection__swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.gender-selection__card:hover .gender-selection__swatch {
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   Sample UI Elements
+   =========================== */
+
+.gender-selection__samples {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gender-selection__sample-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.gender-selection__samples--male .gender-selection__sample-button {
+  background: #9333EA;
+  color: white;
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.3);
+}
+
+.gender-selection__samples--female .gender-selection__sample-button {
+  background: #FF7F50;
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 127, 80, 0.3);
+}
+
+.gender-selection__sample-badge {
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.gender-selection__samples--male .gender-selection__sample-badge {
+  background: rgba(236, 72, 153, 0.2);
+  color: #EC4899;
+  border: 1px solid #EC4899;
+}
+
+.gender-selection__samples--female .gender-selection__sample-badge {
+  background: rgba(255, 217, 61, 0.2);
+  color: #D18700;
+  border: 1px solid #FFD93D;
+}
+
+.gender-selection__sample-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.gender-selection__samples--male .gender-selection__sample-text {
+  color: #3B82F6;
+}
+
+.gender-selection__samples--female .gender-selection__sample-text {
+  color: #FF6B6B;
+}
+
+/* ===========================
+   Theme Info Section
+   =========================== */
+
+.gender-selection__info {
+  text-align: center;
+}
+
+.gender-selection__card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.gender-selection__card--male .gender-selection__card-title {
+  color: #7E22CE;
+}
+
+.gender-selection__card--female .gender-selection__card-title {
+  color: #E8533B;
+}
+
+.gender-selection__card-description {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #5A4A42;
+  margin: 0 0 1rem 0;
+  opacity: 0.85;
+}
+
+.gender-selection__tags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gender-selection__tag {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.gender-selection__card--male .gender-selection__tag {
+  background: rgba(147, 51, 234, 0.1);
+  color: #7E22CE;
+  border: 1px solid rgba(147, 51, 234, 0.2);
+}
+
+.gender-selection__card--female .gender-selection__tag {
+  background: rgba(255, 127, 80, 0.1);
+  color: #E8533B;
+  border: 1px solid rgba(255, 127, 80, 0.2);
+}
+
+.gender-selection__card:hover .gender-selection__tag {
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   Selection Checkmark
+   =========================== */
+
+.gender-selection__checkmark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.gender-selection__card--male .gender-selection__checkmark {
+  color: #9333EA;
+}
+
+.gender-selection__card--female .gender-selection__checkmark {
+  color: #FF7F50;
+}
+
+.gender-selection__checkmark svg {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* ===========================
+   Helper Text
+   =========================== */
+
+.gender-selection__helper {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9375rem;
+  color: #8B7D77;
+  opacity: 0.7;
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+@media (max-width: 767px) {
+  .gender-selection__title {
+    font-size: 2rem;
+  }
+
+  .gender-selection__preview {
+    height: 160px;
+  }
+
+  .gender-selection__card-content {
+    padding: 1.5rem;
+  }
+
+  .gender-selection__swatches {
+    gap: 0.5rem;
+  }
+
+  .gender-selection__swatch {
+    width: 32px;
+    height: 32px;
+  }
+
+  .gender-selection__samples {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* ===========================
+   Touch-friendly Mobile
+   =========================== */
+
+@media (hover: none) and (pointer: coarse) {
+  .gender-selection__card {
+    /* Larger tap targets on mobile */
+    min-height: 400px;
+  }
+
+  .gender-selection__card:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ===========================
+   Accessibility
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .gender-selection__card,
+  .gender-selection__swatch,
+  .gender-selection__sample-button,
+  .gender-selection__tag {
+    transition: none;
+  }
+
+  .gender-selection__preview-bg--male,
+  .gender-selection__preview-bg--female {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gender-selection__card {
+    border-width: 3px;
+  }
+
+  .gender-selection__card--selected {
+    border-width: 4px;
+  }
+}
