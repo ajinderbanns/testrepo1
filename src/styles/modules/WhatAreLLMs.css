@@ -1,0 +1,242 @@
+/**
+ * WhatAreLLMs Component Styles
+ * 
+ * Additional CSS for structural layout and responsive design.
+ * Theme-specific colors and spacing are handled via inline styles.
+ */
+
+/* Container */
+.what-are-llms {
+  width: 100%;
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .what-are-llms {
+    padding: 2rem 1rem !important;
+  }
+
+  .what-are-llms h1 {
+    font-size: 2rem !important;
+  }
+
+  .what-are-llms h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .what-are-llms h3 {
+    font-size: 1.25rem !important;
+  }
+
+  .what-are-llms h4 {
+    font-size: 1.125rem !important;
+  }
+
+  .what-are-llms p {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .what-are-llms {
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  .what-are-llms h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .what-are-llms h2 {
+    font-size: 1.375rem !important;
+  }
+}
+
+/* Concept Blocks */
+.concept-block {
+  position: relative;
+}
+
+.concept-block--paragraph {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.concept-block--callout {
+  position: relative;
+  overflow: visible;
+}
+
+.concept-block--callout::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-primary-main);
+}
+
+.concept-block--callout.concept-block--info::before {
+  background: var(--color-info);
+}
+
+.concept-block--callout.concept-block--tip::before {
+  background: var(--color-accent-main);
+}
+
+.concept-block--callout.concept-block--warning::before {
+  background: var(--color-warning);
+}
+
+/* Make callout content HTML rendering safe */
+.concept-block--callout strong,
+.concept-block--list strong {
+  font-weight: 600;
+}
+
+.concept-block--callout em,
+.concept-block--list em {
+  font-style: italic;
+}
+
+.concept-block--callout code,
+.concept-block--list code {
+  font-family: var(--font-family-mono, monospace);
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* Lists */
+.concept-block--list {
+  counter-reset: list-counter;
+}
+
+.concept-block--list li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Example Cards */
+.example-card {
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+.example-card:hover {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 768px) {
+  .example-card {
+    padding: 1rem !important;
+  }
+}
+
+/* Analogy Cards */
+.analogy-card {
+  transition: all 0.3s ease;
+  will-change: transform, border-color, box-shadow;
+  cursor: default;
+}
+
+.analogy-card:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .analogy-card {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Learning Objectives */
+.learning-objectives {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.learning-objectives ul {
+  margin: 0;
+  padding: 0;
+}
+
+.learning-objectives li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Smooth scroll behavior */
+.what-are-llms * {
+  scroll-behavior: smooth;
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .what-are-llms *,
+  .example-card,
+  .analogy-card {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .what-are-llms {
+    padding: 0 !important;
+  }
+
+  .example-card,
+  .analogy-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* Focus states for accessibility */
+.example-card:focus-visible,
+.analogy-card:focus-visible {
+  outline: 3px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+/* List bullets - ensure they're visible */
+.list-bullet {
+  flex-shrink: 0;
+}
+
+/* Responsive typography adjustments */
+@media (min-width: 1024px) {
+  .what-are-llms {
+    max-width: 1000px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .what-are-llms {
+    max-width: 1100px !important;
+  }
+}
+
+/* Dark mode support (if needed in future) */
+@media (prefers-color-scheme: dark) {
+  .concept-block--callout code,
+  .concept-block--list code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
