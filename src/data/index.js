@@ -8,3 +8,5 @@
 
 export * from './types.js'
 export { default as module1Content, module1Content } from './modules/module1.js'
+export * from './module1Structure.js'
+export * from './module1Examples.js'
