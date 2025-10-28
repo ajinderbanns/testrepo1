@@ -8,3 +8,5 @@
 
 export { useTheme } from './useTheme'
 export { useGenderPreference } from './useGenderPreference'
+export { useProgress } from './useProgress'
+export { useModuleProgress } from './useModuleProgress'
