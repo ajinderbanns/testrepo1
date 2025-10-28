@@ -40,3 +40,11 @@ export {
   clearProgress,
   initializeProgress,
 } from './progressManager'
+
+export {
+  getResumePoint,
+  resetProgress,
+  getModuleRoute,
+  getNextIncompleteSection,
+  hasStartedLearning,
+} from './progressHelpers'
