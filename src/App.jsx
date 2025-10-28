@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Landing, Learn, Module1, Module2, Module3 } from './pages'
 import { ProtectedRoute } from './components'
 import { loadGenderPreference } from './utils/localStorage'
@@ -60,6 +60,7 @@ function App() {
         }
       />
       
+      {/* Module 1 with nested section routes */}
       <Route
         path="/module/1"
         element={
@@ -67,7 +68,12 @@ function App() {
             <Module1 />
           </ProtectedRoute>
         }
-      />
+      >
+        {/* Default redirect to intro section */}
+        <Route index element={<Navigate to="intro" replace />} />
+        {/* Section routes */}
+        <Route path=":sectionPath" element={<Module1 />} />
+      </Route>
       
       <Route
         path="/module/2"
