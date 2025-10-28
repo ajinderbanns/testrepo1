@@ -93,6 +93,121 @@ The component manages selection state internally but **does not persist** the ch
 
 ### Related
 
-- Next step: Theme preview and confirmation (ticket #39)
+- Next step: Theme preview and confirmation (ThemePreview component)
 - Theme system: `/src/styles/themes/`
 - UI components: `/src/components/ui/`
+
+---
+
+## ThemePreview
+
+Full-screen preview component showing selected theme applied to sample learning content.
+
+### Features
+
+- **Full-Screen Immersive Preview**: Shows authentic representation of learning interface
+- **Sample Content**: Includes module card, typography, UI elements, and visualization
+- **Theme Application**: Applies exact theme colors and styling using theme system
+- **Confirmation Flow**: Persists gender preference to localStorage on confirmation
+- **Back Navigation**: Returns to gender selection if user wants to change
+- **Smooth Animations**: Framer Motion entrance and exit transitions
+- **Responsive Design**: Works across all device sizes
+
+### Usage
+
+```jsx
+import { ThemePreview } from '@/components/onboarding'
+
+function OnboardingFlow() {
+  const [selectedGender, setSelectedGender] = useState('female')
+  
+  const handleConfirm = () => {
+    navigate('/learn')
+  }
+  
+  const handleBack = () => {
+    setStep('selection')
+  }
+  
+  return (
+    <ThemePreview
+      selectedGender={selectedGender}
+      onConfirm={handleConfirm}
+      onBack={handleBack}
+    />
+  )
+}
+```
+
+### Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `selectedGender` | `'male' \| 'female'` | Yes | The theme to preview |
+| `onConfirm` | `function` | No | Callback when user confirms selection. Defaults to navigating to /learn |
+| `onBack` | `function` | Yes | Callback when user wants to go back to selection |
+| `className` | `string` | No | Additional CSS classes |
+
+### Sample Content Includes
+
+- **Module Card**: Realistic module preview with badge, title, description
+- **Visualization**: Abstract SVG representation of data flow
+- **UI Elements**: Buttons, badges in selected theme
+- **Typography Samples**: Heading and body text examples
+- **Colors**: Full color palette representation
+
+### LocalStorage Persistence
+
+The component automatically saves the gender preference to localStorage using `saveGenderPreference()` when the user clicks the confirmation button. This ensures the preference persists across sessions.
+
+### Accessibility
+
+- **Keyboard Navigation**: Back button supports keyboard interaction
+- **ARIA Labels**: Descriptive labels for screen readers
+- **Reduced Motion**: Respects `prefers-reduced-motion` preference
+- **High Contrast**: Supports high contrast mode
+
+---
+
+## OnboardingFlow
+
+Multi-step orchestrator component that manages the complete onboarding experience.
+
+### Features
+
+- **Step-based Flow Management**: Handles transitions between selection and preview steps
+- **State Management**: Tracks selected gender and current step
+- **Auto-redirect**: Redirects returning users who already have preferences
+- **Smooth Transitions**: Framer Motion page transitions between steps
+- **Back Navigation**: Supports returning to previous step
+
+### Usage
+
+```jsx
+import { OnboardingFlow } from '@/components/onboarding'
+
+function Landing() {
+  return (
+    <div className="landing-page">
+      <OnboardingFlow />
+    </div>
+  )
+}
+```
+
+### Flow Steps
+
+1. **Gender Selection**: User chooses between male or female theme
+2. **Theme Preview**: User sees full-screen preview of selected theme and confirms
+3. **Navigation**: User is redirected to /learn after confirmation
+
+### Props
+
+The component doesn't accept props - it manages its own state and navigation.
+
+### Implementation Details
+
+- Checks for existing preference on mount
+- Manages step transitions with AnimatePresence
+- Passes callbacks between steps
+- Handles final navigation after confirmation
