@@ -56,3 +56,18 @@ export {
   getWalkthroughMetadata,
   WALKTHROUGH_STORAGE_KEY,
 } from './walkthroughStorage'
+
+export {
+  getBreadcrumbs,
+  getNavigationItems,
+  isRouteActive,
+  getModuleIdFromPath,
+  getSectionIdFromPath,
+  getUnlockMessage,
+  getNextModule as getNextModuleNav,
+  getPreviousModule,
+  formatCompletionPercentage,
+  getKeyboardShortcuts,
+  smoothScrollTo,
+  shouldHideNavigation,
+} from './navigationHelpers'

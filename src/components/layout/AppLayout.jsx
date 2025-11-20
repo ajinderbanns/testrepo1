@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Header from './Header'
+import { AppHeader } from '../Navigation'
 import Footer from './Footer'
 import './AppLayout.css'
 
 /**
  * AppLayout Component
  * Root-level wrapper component that provides consistent structure across the application
- * Includes Header and Footer, with main content area for children
+ * Includes AppHeader (enhanced navigation) and Footer, with main content area for children
  * Provides theme-aware styling hooks and responsive design
  */
 function AppLayout({ 
@@ -20,8 +20,8 @@ function AppLayout({
 }) {
   return (
     <div className={`app-layout ${className}`}>
-      {/* Header Section */}
-      {showHeader && <Header showNav={showNav} />}
+      {/* Enhanced Header with Navigation */}
+      {showHeader && <AppHeader showNav={showNav} />}
 
       {/* Main Content Area */}
       <main className={`app-main ${contentClassName}`}>

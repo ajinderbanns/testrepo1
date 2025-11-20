@@ -1,0 +1,64 @@
+/**
+ * AppHeader Styles
+ * Responsive styles for the navigation header
+ */
+
+.app-header {
+  width: 100%;
+}
+
+.app-header__content {
+  width: 100%;
+}
+
+/* Navigation hover effects */
+.app-header__nav a:hover:not([disabled]) {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.app-header__nav a:active:not([disabled]) {
+  transform: translateY(0);
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .app-header__content {
+    padding: 0 16px;
+  }
+
+  .app-header__brand h1 {
+    font-size: 1.25rem;
+  }
+
+  .app-header__nav {
+    display: none;
+  }
+
+  .app-header__mobile-toggle {
+    display: flex !important;
+  }
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  .app-header__nav ul {
+    gap: 4px;
+  }
+
+  .app-header__nav a {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Accessibility */
+.app-header a:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+.app-header button:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: 2px;
+}

@@ -6,3 +6,4 @@ export { ProgressBar as ProgressBarEnhanced, CircularProgress, ModuleStatus, Mil
 export { default as ContinueLearning } from './ContinueLearning'
 export { default as ResetProgress } from './settings/ResetProgress'
 export { WalkthroughOverlay, WalkthroughStep, WalkthroughProgress } from './Walkthrough'
+export { AppHeader, MobileMenu, Breadcrumbs, ModuleCard, LearningPathMap } from './Navigation'

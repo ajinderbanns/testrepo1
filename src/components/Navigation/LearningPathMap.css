@@ -1,0 +1,74 @@
+/**
+ * LearningPathMap Styles
+ * Visual learning journey with responsive design
+ */
+
+.learning-path-map {
+  width: 100%;
+}
+
+/* Path container */
+.learning-path-map__path {
+  position: relative;
+}
+
+/* Module wrapper */
+.learning-path-map__module {
+  position: relative;
+  z-index: 1;
+}
+
+/* Connector styling */
+.learning-path-map__connector {
+  position: relative;
+  z-index: 0;
+}
+
+/* Horizontal variant (mobile) */
+.learning-path-map--horizontal .learning-path-map__path {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.learning-path-map--horizontal .learning-path-map__path::-webkit-scrollbar {
+  height: 8px;
+}
+
+.learning-path-map--horizontal .learning-path-map__path::-webkit-scrollbar-track {
+  background: var(--color-surface-base, #f5f5f5);
+  border-radius: 4px;
+}
+
+.learning-path-map--horizontal .learning-path-map__path::-webkit-scrollbar-thumb {
+  background: var(--color-border-default, #ddd);
+  border-radius: 4px;
+}
+
+.learning-path-map--horizontal .learning-path-map__path::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-main, #007bff);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .learning-path-map {
+    padding: 16px;
+  }
+
+  /* Switch to horizontal scroll on mobile */
+  .learning-path-map--vertical .learning-path-map__path {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+
+  .learning-path-map--vertical .learning-path-map__module {
+    min-width: 280px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .learning-path-map__module {
+    max-width: 500px;
+  }
+}

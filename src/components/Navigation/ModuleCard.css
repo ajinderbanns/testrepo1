@@ -1,0 +1,40 @@
+/**
+ * ModuleCard Styles
+ * Interactive module card with hover effects
+ */
+
+.module-card {
+  width: 100%;
+}
+
+/* Hover effects */
+.module-card:not(.module-card--locked):hover {
+  box-shadow: var(--shadow-large, 0 8px 24px rgba(0, 0, 0, 0.12));
+}
+
+.module-card:not(.module-card--locked):hover .module-card__header h3 {
+  color: var(--color-primary-main);
+}
+
+/* Locked state */
+.module-card--locked {
+  filter: grayscale(0.3);
+}
+
+/* Accessibility */
+.module-card:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .module-card {
+    padding: 16px;
+  }
+
+  .module-card__header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
