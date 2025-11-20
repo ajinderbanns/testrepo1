@@ -106,6 +106,7 @@ function App() {
           <Route path=":sectionPath" element={<Module2 />} />
         </Route>
         
+        {/* Module 3 with nested section routes */}
         <Route
           path="/module/3"
           element={
@@ -115,7 +116,12 @@ function App() {
               </PageTransition>
             </ProtectedRoute>
           }
-        />
+        >
+          {/* Default redirect to training section */}
+          <Route index element={<Navigate to="training" replace />} />
+          {/* Section routes */}
+          <Route path=":sectionPath" element={<Module3 />} />
+        </Route>
       </Routes>
     </AnimatePresence>
   )
