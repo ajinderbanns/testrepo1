@@ -1,0 +1,44 @@
+/**
+ * MobileMenu Styles
+ * Touch-friendly mobile navigation
+ */
+
+.mobile-menu__drawer {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch-friendly tap targets */
+.mobile-menu__nav a {
+  min-height: 48px;
+}
+
+/* Hover effects for touch devices */
+@media (hover: hover) {
+  .mobile-menu__nav a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .mobile-menu__close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Active state for touch */
+.mobile-menu__nav a:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibility */
+.mobile-menu__drawer:focus {
+  outline: none;
+}
+
+.mobile-menu__close:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+.mobile-menu__nav a:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: -2px;
+}

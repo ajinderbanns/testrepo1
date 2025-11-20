@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import { Landing, Learn, Module1, Module2, Module3 } from './pages'
-import { ProtectedRoute } from './components'
+import { ProtectedRoute, PageTransition } from './components'
 import { loadGenderPreference } from './utils/localStorage'
 import { useTheme } from './hooks/useTheme'
 
@@ -9,6 +10,7 @@ function App() {
   // Track hydration state to prevent theme flash
   const [isHydrated, setIsHydrated] = useState(false)
   const { switchTheme } = useTheme()
+  const location = useLocation()
 
   /**
    * State Hydration on Mount
@@ -46,53 +48,70 @@ function App() {
   }
 
   return (
-    <Routes>
-      {/* Public route - Landing page with gender selection */}
-      <Route path="/" element={<Landing />} />
-      
-      {/* Protected routes - require gender selection */}
-      <Route
-        path="/learn"
-        element={
-          <ProtectedRoute>
-            <Learn />
-          </ProtectedRoute>
-        }
-      />
-      
-      {/* Module 1 with nested section routes */}
-      <Route
-        path="/module/1"
-        element={
-          <ProtectedRoute>
-            <Module1 />
-          </ProtectedRoute>
-        }
-      >
-        {/* Default redirect to intro section */}
-        <Route index element={<Navigate to="intro" replace />} />
-        {/* Section routes */}
-        <Route path=":sectionPath" element={<Module1 />} />
-      </Route>
-      
-      <Route
-        path="/module/2"
-        element={
-          <ProtectedRoute>
-            <Module2 />
-          </ProtectedRoute>
-        }
-      />
-      
-      <Route
-        path="/module/3"
-        element={
-          <ProtectedRoute>
-            <Module3 />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        {/* Public route - Landing page with gender selection */}
+        <Route 
+          path="/" 
+          element={
+            <PageTransition variant="fade">
+              <Landing />
+            </PageTransition>
+          } 
+        />
+        
+        {/* Protected routes - require gender selection */}
+        <Route
+          path="/learn"
+          element={
+            <ProtectedRoute>
+              <PageTransition variant="fade">
+                <Learn />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Module 1 with nested section routes */}
+        <Route
+          path="/module/1"
+          element={
+            <ProtectedRoute>
+              <PageTransition variant="slideRight">
+                <Module1 />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        >
+          {/* Default redirect to intro section */}
+          <Route index element={<Navigate to="intro" replace />} />
+          {/* Section routes */}
+          <Route path=":sectionPath" element={<Module1 />} />
+        </Route>
+        
+        <Route
+          path="/module/2"
+          element={
+            <ProtectedRoute>
+              <PageTransition variant="slideRight">
+                <Module2 />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/module/3"
+          element={
+            <ProtectedRoute>
+              <PageTransition variant="slideRight">
+                <Module3 />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
   )
 }
 
