@@ -89,6 +89,7 @@ function App() {
           <Route path=":sectionPath" element={<Module1 />} />
         </Route>
         
+        {/* Module 2 with nested section routes */}
         <Route
           path="/module/2"
           element={
@@ -98,7 +99,12 @@ function App() {
               </PageTransition>
             </ProtectedRoute>
           }
-        />
+        >
+          {/* Default redirect to tokenization section */}
+          <Route index element={<Navigate to="tokenization" replace />} />
+          {/* Section routes */}
+          <Route path=":sectionPath" element={<Module2 />} />
+        </Route>
         
         <Route
           path="/module/3"
