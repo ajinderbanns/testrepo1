@@ -22,16 +22,30 @@
   position: relative;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Mobile First */
+/* Base styles are for mobile */
+.app-main {
+  padding: 1rem;
+}
+
+/* Tablet (>= 640px) */
+@media (min-width: 640px) {
   .app-main {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
   .app-main {
-    padding: 1rem;
+    padding: 2rem;
+  }
+}
+
+/* Large Desktop (>= 1280px) */
+@media (min-width: 1280px) {
+  .app-main {
+    padding: 2.5rem;
   }
 }
 

@@ -1,0 +1,392 @@
+/**
+ * Accessibility Styles
+ * 
+ * Comprehensive accessibility utilities following WCAG 2.1 AA standards:
+ * - Focus indicators for keyboard navigation
+ * - Screen reader utilities
+ * - Skip links
+ * - Reduced motion support
+ * - High contrast support
+ * - Keyboard navigation helpers
+ */
+
+/* ===========================
+   Focus Indicators
+   =========================== */
+
+/* Global focus styles with visible indicators */
+:focus {
+  outline: 2px solid var(--color-focus, #646cff);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus, #646cff);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Enhanced focus for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-focus, #646cff);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(100, 108, 255, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Focus within (for compound components) */
+.has-focus-within:focus-within {
+  outline: 2px solid var(--color-focus, #646cff);
+  outline-offset: 2px;
+}
+
+/* Custom focus ring utilities */
+.focus-ring-primary:focus-visible {
+  outline-color: var(--color-primary-main, #646cff);
+  box-shadow: 0 0 0 6px var(--color-primary-alpha, rgba(100, 108, 255, 0.1));
+}
+
+.focus-ring-secondary:focus-visible {
+  outline-color: var(--color-secondary-main, #ff6b9d);
+  box-shadow: 0 0 0 6px var(--color-secondary-alpha, rgba(255, 107, 157, 0.1));
+}
+
+.focus-ring-error:focus-visible {
+  outline-color: var(--color-error-main, #f44336);
+  box-shadow: 0 0 0 6px var(--color-error-alpha, rgba(244, 67, 54, 0.1));
+}
+
+.focus-ring-inset:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--color-focus, #646cff);
+}
+
+/* ===========================
+   Screen Reader Utilities
+   =========================== */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focusable screen reader text (e.g., skip links) */
+.sr-only-focusable:focus,
+.visually-hidden-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Screen reader only text for icons */
+.icon-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* ===========================
+   Skip Links
+   =========================== */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-focus, #646cff);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+  z-index: 10000;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid white;
+  outline-offset: -3px;
+}
+
+/* ===========================
+   Keyboard Navigation
+   =========================== */
+
+/* Indicate keyboard navigation mode */
+body.using-keyboard *:focus {
+  outline: 3px solid var(--color-focus, #646cff);
+  outline-offset: 3px;
+}
+
+body.using-mouse *:focus {
+  outline: none;
+}
+
+/* Tab order helper */
+[tabindex="-1"] {
+  outline: none !important;
+}
+
+/* Interactive elements should have cursor pointer */
+button,
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+a[href],
+label[for],
+select,
+[tabindex]:not([tabindex="-1"]) {
+  cursor: pointer;
+}
+
+/* Disabled state accessibility */
+[disabled],
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ===========================
+   Reduced Motion Support
+   =========================== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Allow opacity transitions */
+  * {
+    transition-property: opacity !important;
+  }
+}
+
+/* Reduced motion utility class */
+.reduce-motion {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===========================
+   High Contrast Support
+   =========================== */
+
+@media (prefers-contrast: high) {
+  :root {
+    --border-width: 2px;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    border: 2px solid currentColor;
+  }
+
+  :focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+/* ===========================
+   Color Blindness Support
+   =========================== */
+
+/* Don't rely solely on color - use patterns/icons */
+.color-indicator {
+  position: relative;
+}
+
+.color-indicator::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ===========================
+   ARIA Live Regions
+   =========================== */
+
+/* Polite announcements (non-urgent) */
+.aria-live-polite {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Assertive announcements (urgent) */
+.aria-live-assertive {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ===========================
+   Text Alternatives
+   =========================== */
+
+/* Image replacement technique */
+.img-replacement {
+  display: block;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  text-align: left;
+}
+
+/* ===========================
+   Touch Target Size
+   =========================== */
+
+/* Ensure minimum touch target size of 44x44px */
+.touch-target-min {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile touch targets */
+@media (max-width: 640px) {
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"],
+  [role="button"] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ===========================
+   Semantic Focus Management
+   =========================== */
+
+/* Modal/Dialog focus trap indicator */
+[role="dialog"] {
+  position: relative;
+}
+
+[role="dialog"]:focus {
+  outline: none;
+}
+
+/* Alert styling */
+[role="alert"] {
+  padding: 1rem;
+  border-left: 4px solid var(--color-error-main, #f44336);
+  background-color: var(--color-error-light, rgba(244, 67, 54, 0.1));
+}
+
+[role="status"] {
+  padding: 1rem;
+  border-left: 4px solid var(--color-info-main, #2196f3);
+  background-color: var(--color-info-light, rgba(33, 150, 243, 0.1));
+}
+
+/* ===========================
+   Landmark Regions
+   =========================== */
+
+/* Ensure landmarks are identifiable */
+main {
+  outline: none;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* ===========================
+   Print Accessibility
+   =========================== */
+
+@media print {
+  /* Show URLs after links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  /* Hide non-essential elements */
+  nav,
+  .skip-link,
+  [aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Ensure good contrast */
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ===========================
+   Utility Classes
+   =========================== */
+
+/* Accessible hiding */
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* Accessible showing */
+.visible {
+  visibility: visible;
+}
+
+/* Force show (override display: none) */
+.force-show {
+  display: block !important;
+  visibility: visible !important;
+}

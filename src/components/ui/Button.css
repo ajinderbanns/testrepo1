@@ -16,9 +16,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enhanced focus indicators */
 .ui-button:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-focus, #646cff);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(100, 108, 255, 0.1);
+}
+
+/* Keyboard navigation mode */
+body.using-keyboard .ui-button:focus {
+  outline: 3px solid var(--color-focus, #646cff);
+  outline-offset: 3px;
 }
 
 /* Primary Variant - Theme-specific glow effects */
@@ -84,10 +92,43 @@
   filter: grayscale(30%);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .ui-button:focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ui-button,
+  .button-spinner {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* Mobile (< 640px) - Base styles */
+.ui-button {
+  min-height: 44px;
+}
+
+/* Tablet (>= 640px) */
+@media (min-width: 640px) {
+  .ui-button--small {
+    min-height: 36px;
+  }
+}
+
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
   .ui-button--large {
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    padding: 0.875rem 1.75rem;
   }
 }

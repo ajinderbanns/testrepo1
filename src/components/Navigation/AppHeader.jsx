@@ -49,11 +49,15 @@ function AppHeader({ showNav = true, className = '' }) {
 
   // Full navigation header
   return (
-    <header className={`app-header ${className}`} style={styles.header(theme)}>
+    <header className={`app-header ${className}`} style={styles.header(theme)} role="banner">
       <div className="app-header__content" style={styles.content}>
         {/* Logo/Brand */}
         <div className="app-header__brand" style={styles.brand}>
-          <Link to="/learn" style={styles.brandLink(theme)}>
+          <Link 
+            to="/learn" 
+            style={styles.brandLink(theme)}
+            aria-label="LLM Education - Home"
+          >
             <motion.h1
               style={styles.brandTitle(theme)}
               whileHover={{ scale: 1.02 }}
@@ -66,8 +70,13 @@ function AppHeader({ showNav = true, className = '' }) {
 
         {/* Desktop Navigation */}
         {showNav && (
-          <nav className="app-header__nav" style={styles.nav}>
-            <ul style={styles.navList}>
+          <nav 
+            className="app-header__nav" 
+            style={styles.nav}
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <ul style={styles.navList} role="list">
               {/* Home Link */}
               <li style={styles.navItem}>
                 <Link
@@ -76,6 +85,7 @@ function AppHeader({ showNav = true, className = '' }) {
                     ...styles.navLink(theme),
                     ...(isActive('/learn', true) ? styles.navLinkActive(theme) : {}),
                   }}
+                  aria-current={isActive('/learn', true) ? 'page' : undefined}
                 >
                   Home
                 </Link>
@@ -96,17 +106,20 @@ function AppHeader({ showNav = true, className = '' }) {
                         e.preventDefault()
                       }
                     }}
+                    aria-label={`${item.title}${item.isCompleted ? ' - Completed' : item.isInProgress ? ' - In Progress' : item.isLocked ? ' - Locked' : ''}`}
+                    aria-disabled={item.isLocked}
+                    aria-current={isActive(item.path) ? 'page' : undefined}
                     title={item.isLocked ? `Complete previous modules to unlock` : item.description}
                   >
                     <span>{item.title}</span>
                     {item.isCompleted && (
-                      <span style={styles.statusBadge(theme, 'completed')}>✓</span>
+                      <span style={styles.statusBadge(theme, 'completed')} aria-hidden="true">✓</span>
                     )}
                     {item.isInProgress && !item.isCompleted && (
-                      <span style={styles.statusBadge(theme, 'in-progress')}>●</span>
+                      <span style={styles.statusBadge(theme, 'in-progress')} aria-hidden="true">●</span>
                     )}
                     {item.isLocked && (
-                      <span style={styles.statusBadge(theme, 'locked')}>🔒</span>
+                      <span style={styles.statusBadge(theme, 'locked')} aria-hidden="true">🔒</span>
                     )}
                   </Link>
                 </li>
@@ -118,15 +131,18 @@ function AppHeader({ showNav = true, className = '' }) {
         {/* Mobile Menu Toggle */}
         {showNav && (
           <button
-            className="app-header__mobile-toggle"
+            className="app-header__mobile-toggle touch-target-min"
             style={styles.mobileToggle(theme, isMobileMenuOpen)}
             onClick={toggleMobileMenu}
-            aria-label="Toggle navigation menu"
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            type="button"
           >
-            <span style={styles.menuIcon(theme, isMobileMenuOpen, 0)} />
-            <span style={styles.menuIcon(theme, isMobileMenuOpen, 1)} />
-            <span style={styles.menuIcon(theme, isMobileMenuOpen, 2)} />
+            <span style={styles.menuIcon(theme, isMobileMenuOpen, 0)} aria-hidden="true" />
+            <span style={styles.menuIcon(theme, isMobileMenuOpen, 1)} aria-hidden="true" />
+            <span style={styles.menuIcon(theme, isMobileMenuOpen, 2)} aria-hidden="true" />
+            <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
           </button>
         )}
       </div>
