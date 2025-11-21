@@ -1,6 +1,6 @@
 /**
  * AppHeader Styles
- * Responsive styles for the navigation header
+ * Responsive styles for the navigation header with accessibility enhancements
  */
 
 .app-header {
@@ -21,16 +21,46 @@
   transform: translateY(0);
 }
 
-/* Mobile breakpoint */
-@media (max-width: 768px) {
+/* Touch targets - ensure minimum 44x44px */
+.app-header__nav a,
+.app-header__mobile-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile First Responsive Design */
+
+/* Base Mobile Styles (< 640px) */
+.app-header__content {
+  padding: 0 1rem;
+}
+
+.app-header__brand h1 {
+  font-size: 1.125rem;
+}
+
+.app-header__nav {
+  display: none;
+}
+
+.app-header__mobile-toggle {
+  display: flex !important;
+}
+
+/* Tablet (>= 640px) */
+@media (min-width: 640px) {
   .app-header__content {
-    padding: 0 16px;
+    padding: 0 1.5rem;
   }
 
   .app-header__brand h1 {
     font-size: 1.25rem;
   }
 
+  /* Still show mobile menu on tablet */
   .app-header__nav {
     display: none;
   }
@@ -40,25 +70,96 @@
   }
 }
 
-/* Tablet breakpoint */
-@media (max-width: 1024px) {
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
+  .app-header__content {
+    padding: 0 2rem;
+  }
+
+  .app-header__brand h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Show desktop navigation */
+  .app-header__nav {
+    display: flex !important;
+  }
+
+  .app-header__mobile-toggle {
+    display: none !important;
+  }
+
   .app-header__nav ul {
-    gap: 4px;
+    gap: 0.5rem;
   }
 
   .app-header__nav a {
-    padding: 6px 12px;
-    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
   }
 }
 
-/* Accessibility */
-.app-header a:focus-visible {
-  outline: 2px solid var(--color-primary-main);
-  outline-offset: 2px;
+/* Large Desktop (>= 1280px) */
+@media (min-width: 1280px) {
+  .app-header__nav ul {
+    gap: 0.75rem;
+  }
+
+  .app-header__nav a {
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+  }
 }
 
+/* ===========================
+   Accessibility Enhancements
+   =========================== */
+
+/* Enhanced focus indicators */
+.app-header a:focus-visible,
 .app-header button:focus-visible {
-  outline: 2px solid var(--color-primary-main);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-primary-main, #646cff);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(100, 108, 255, 0.1);
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Keyboard navigation indicator */
+body.using-keyboard .app-header a:focus,
+body.using-keyboard .app-header button:focus {
+  outline: 3px solid var(--color-primary-main, #646cff);
+  outline-offset: 3px;
+}
+
+/* Ensure links are keyboard accessible */
+.app-header a,
+.app-header button {
+  position: relative;
+}
+
+/* Disabled state accessibility */
+.app-header a[aria-disabled="true"],
+.app-header button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .app-header a:focus-visible,
+  .app-header button:focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .app-header__nav a,
+  .app-header__mobile-toggle span {
+    transition: none !important;
+    animation: none !important;
+  }
 }

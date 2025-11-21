@@ -1,5 +1,7 @@
-/* Import Typography System */
+/* Import Design System Styles */
 @import './styles/typography.css';
+@import './styles/breakpoints.css';
+@import './styles/accessibility.css';
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -115,4 +117,45 @@ button:focus-visible {
 
 .read-the-docs {
   color: #888;
+}
+
+/* ===========================
+   Additional Accessibility & Performance Styles
+   =========================== */
+
+/* Enhanced reduced motion support (not covered by accessibility.css) */
+@media (prefers-reduced-motion: reduce) {
+  /* Global override for all animations */
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keyframe animations for loading spinner */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Performance: GPU acceleration for animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Performance: Contain layout shifts */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-strict {
+  contain: strict;
 }

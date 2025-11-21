@@ -29,24 +29,95 @@
   animation: cursorBlink 0.8s infinite;
 }
 
-/* Responsive design - Tablet */
-@media (max-width: 768px) {
+/* Responsive design - Mobile First Approach */
+
+/* Base Mobile Styles (< 640px) */
+.text-generation-viz {
+  padding: 1rem !important;
+  border-radius: 1rem !important;
+}
+
+.text-generation-viz h2 {
+  font-size: 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.text-generation-viz p {
+  font-size: 0.875rem !important;
+}
+
+.example-selector {
+  flex-direction: column !important;
+  width: 100%;
+}
+
+.example-selector button {
+  width: 100%;
+  min-width: 100% !important;
+  min-height: 44px;
+}
+
+.prompt-container,
+.output-container {
+  padding: 0.75rem !important;
+}
+
+.output-container {
+  min-height: 120px !important;
+  font-size: 0.875rem !important;
+}
+
+.controls-container {
+  flex-direction: column !important;
+  width: 100%;
+  gap: 0.5rem !important;
+}
+
+.controls-container button {
+  width: 100%;
+  min-width: 100% !important;
+  min-height: 44px;
+}
+
+.token-count {
+  order: -1;
+  text-align: center;
+  width: 100%;
+}
+
+.probability-indicator {
+  font-size: 0.625rem !important;
+  padding: 0.125rem 0.25rem !important;
+  top: -16px !important;
+}
+
+/* Tablet (>= 640px) */
+@media (min-width: 640px) {
   .text-generation-viz {
     padding: 1.5rem !important;
+    border-radius: 1.5rem !important;
   }
 
   .text-generation-viz h2 {
     font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .text-generation-viz p {
+    font-size: 1rem !important;
   }
 
   .example-selector {
-    gap: 0.5rem !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    width: auto;
   }
 
   .example-selector button {
+    width: auto;
+    min-width: 100px !important;
     font-size: 0.875rem !important;
     padding: 0.5rem 0.75rem !important;
-    min-width: 80px !important;
   }
 
   .prompt-container,
@@ -56,77 +127,53 @@
 
   .output-container {
     min-height: 150px !important;
+    font-size: 1rem !important;
   }
 
   .controls-container {
-    gap: 0.5rem !important;
+    flex-direction: row !important;
+    width: auto;
+    gap: 0.75rem !important;
   }
 
   .controls-container button {
-    min-width: 80px !important;
+    width: auto;
+    min-width: 100px !important;
     font-size: 0.875rem !important;
     padding: 0.5rem 0.75rem !important;
   }
+
+  .token-count {
+    order: 0;
+    text-align: left;
+    width: auto;
+  }
+
+  .probability-indicator {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    top: -20px !important;
+  }
 }
 
-/* Responsive design - Mobile */
-@media (max-width: 480px) {
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
   .text-generation-viz {
-    padding: 1rem !important;
-    border-radius: 1rem !important;
+    padding: 2rem !important;
   }
 
   .text-generation-viz h2 {
-    font-size: 1.25rem !important;
-    margin-bottom: 0.75rem !important;
-  }
-
-  .text-generation-viz p {
-    font-size: 0.875rem !important;
-  }
-
-  .example-selector {
-    flex-direction: column !important;
-    width: 100%;
-  }
-
-  .example-selector button {
-    width: 100%;
-    min-width: 100% !important;
-  }
-
-  .prompt-container,
-  .output-container {
-    padding: 0.75rem !important;
-  }
-
-  .output-container {
-    min-height: 120px !important;
-    font-size: 0.875rem !important;
+    font-size: 1.875rem !important;
   }
 
   .controls-container {
-    flex-direction: column !important;
-    width: 100%;
-    gap: 0.5rem !important;
+    gap: 1rem !important;
   }
 
   .controls-container button {
-    width: 100%;
-    min-width: 100% !important;
-  }
-
-  .token-count {
-    order: -1; /* Move to top on mobile */
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Smaller probability indicators on mobile */
-  .probability-indicator {
-    font-size: 0.625rem !important;
-    padding: 0.125rem 0.25rem !important;
-    top: -16px !important;
+    min-width: 120px !important;
+    font-size: 1rem !important;
+    padding: 0.625rem 1rem !important;
   }
 }
 

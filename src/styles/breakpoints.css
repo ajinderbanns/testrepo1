@@ -1,0 +1,200 @@
+/**
+ * Responsive Breakpoints System
+ * 
+ * Standardized breakpoints for responsive design following mobile-first approach.
+ * Uses CSS custom properties for flexibility and maintainability.
+ * 
+ * Breakpoints:
+ * - Mobile: < 640px (default, mobile-first)
+ * - Tablet: 640px - 1024px
+ * - Desktop: > 1024px
+ */
+
+:root {
+  /* Breakpoint values */
+  --breakpoint-mobile: 320px;
+  --breakpoint-mobile-large: 480px;
+  --breakpoint-tablet: 640px;
+  --breakpoint-tablet-large: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-desktop-large: 1280px;
+  --breakpoint-wide: 1536px;
+  --breakpoint-ultrawide: 1920px;
+
+  /* Container max widths */
+  --container-mobile: 100%;
+  --container-tablet: 640px;
+  --container-desktop: 1024px;
+  --container-wide: 1280px;
+
+  /* Responsive spacing scale */
+  --spacing-mobile: 1rem;
+  --spacing-tablet: 1.5rem;
+  --spacing-desktop: 2rem;
+
+  /* Responsive typography scale */
+  --font-size-display-mobile: 2.5rem;
+  --font-size-display-tablet: 3.5rem;
+  --font-size-display-desktop: 4.5rem;
+
+  --font-size-h1-mobile: 2rem;
+  --font-size-h1-tablet: 2.5rem;
+  --font-size-h1-desktop: 3rem;
+
+  --font-size-h2-mobile: 1.5rem;
+  --font-size-h2-tablet: 1.875rem;
+  --font-size-h2-desktop: 2.25rem;
+
+  --font-size-h3-mobile: 1.25rem;
+  --font-size-h3-tablet: 1.5rem;
+  --font-size-h3-desktop: 1.875rem;
+
+  /* Touch target minimum size */
+  --touch-target-min: 44px;
+}
+
+/* Responsive utility classes */
+.mobile-only {
+  display: block;
+}
+
+.tablet-up {
+  display: none;
+}
+
+.desktop-up {
+  display: none;
+}
+
+/* Tablet and up (>= 640px) */
+@media (min-width: 640px) {
+  :root {
+    --current-spacing: var(--spacing-tablet);
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  .tablet-up {
+    display: block;
+  }
+
+  /* Responsive container */
+  .container-responsive {
+    max-width: var(--container-tablet);
+  }
+}
+
+/* Desktop and up (>= 1024px) */
+@media (min-width: 1024px) {
+  :root {
+    --current-spacing: var(--spacing-desktop);
+  }
+
+  .desktop-up {
+    display: block;
+  }
+
+  /* Responsive container */
+  .container-responsive {
+    max-width: var(--container-desktop);
+  }
+}
+
+/* Large desktop and up (>= 1280px) */
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: var(--container-wide);
+  }
+}
+
+/* Touch-friendly utilities */
+.touch-target {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive text alignment */
+.text-mobile-center {
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .text-tablet-left {
+    text-align: left;
+  }
+
+  .text-tablet-center {
+    text-align: center;
+  }
+
+  .text-tablet-right {
+    text-align: right;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-desktop-left {
+    text-align: left;
+  }
+
+  .text-desktop-center {
+    text-align: center;
+  }
+
+  .text-desktop-right {
+    text-align: right;
+  }
+}
+
+/* Responsive flex utilities */
+.flex-mobile-column {
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .flex-tablet-row {
+    flex-direction: row;
+  }
+
+  .flex-tablet-column {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flex-desktop-row {
+    flex-direction: row;
+  }
+
+  .flex-desktop-column {
+    flex-direction: column;
+  }
+}
+
+/* Responsive grid utilities */
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-responsive-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-responsive-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

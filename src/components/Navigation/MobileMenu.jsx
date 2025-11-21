@@ -11,18 +11,24 @@
  * @component
  */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { useTheme } from '../../hooks/useTheme'
 import { useNavigation } from '../../hooks/useNavigation'
+import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation'
 import ModuleStatus from '../progress/ModuleStatus'
 import './MobileMenu.css'
 
 function MobileMenu({ isOpen, onClose, navigationItems }) {
   const { theme } = useTheme()
   const { isActive } = useNavigation()
+  const { useFocusTrap } = useKeyboardNavigation()
+  const drawerRef = useRef(null)
+
+  // Implement focus trap when menu is open
+  useFocusTrap(drawerRef, isOpen)
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -67,6 +73,8 @@ function MobileMenu({ isOpen, onClose, navigationItems }) {
 
           {/* Drawer */}
           <motion.div
+            ref={drawerRef}
+            id="mobile-menu"
             className="mobile-menu__drawer"
             style={styles.drawer(theme)}
             initial={{ x: '100%' }}
@@ -75,17 +83,28 @@ function MobileMenu({ isOpen, onClose, navigationItems }) {
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
             role="dialog"
             aria-label="Mobile navigation menu"
+            aria-modal="true"
+            aria-describedby="mobile-menu-title"
           >
             {/* Header */}
             <div className="mobile-menu__header" style={styles.header(theme)}>
-              <h2 style={styles.title(theme)}>Navigation</h2>
+              <h2 style={styles.title(theme)} id="mobile-menu-title">Navigation</h2>
               <button
-                className="mobile-menu__close"
+                className="mobile-menu__close touch-target-min"
                 style={styles.closeButton(theme)}
                 onClick={onClose}
-                aria-label="Close menu"
+                aria-label="Close navigation menu"
+                type="button"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
@@ -93,7 +112,12 @@ function MobileMenu({ isOpen, onClose, navigationItems }) {
             </div>
 
             {/* Navigation Links */}
-            <nav className="mobile-menu__nav" style={styles.nav}>
+            <nav 
+              className="mobile-menu__nav" 
+              style={styles.nav}
+              role="navigation"
+              aria-labelledby="mobile-menu-title"
+            >
               {/* Home Link */}
               <Link
                 to="/learn"
@@ -102,50 +126,61 @@ function MobileMenu({ isOpen, onClose, navigationItems }) {
                   ...(isActive('/learn', true) ? styles.navLinkActive(theme) : {}),
                 }}
                 onClick={onClose}
+                aria-current={isActive('/learn', true) ? 'page' : undefined}
+                className="touch-target-min"
               >
-                <span style={styles.navLinkIcon}>🏠</span>
+                <span style={styles.navLinkIcon} aria-hidden="true">🏠</span>
                 <span style={styles.navLinkText}>Home</span>
               </Link>
 
-              <div style={styles.divider(theme)} />
+              <div style={styles.divider(theme)} role="separator" aria-hidden="true" />
 
               {/* Module Links */}
               <div style={styles.modulesSection}>
-                <h3 style={styles.sectionTitle(theme)}>Modules</h3>
-                {navigationItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.path}
-                    style={{
-                      ...styles.moduleLink(theme),
-                      ...(isActive(item.path) ? styles.moduleLinkActive(theme) : {}),
-                      ...(item.isLocked ? styles.moduleLinkLocked(theme) : {}),
-                    }}
-                    onClick={(e) => {
-                      if (item.isLocked) {
-                        e.preventDefault()
-                      } else {
-                        onClose()
-                      }
-                    }}
-                  >
-                    <div style={styles.moduleLinkContent}>
-                      <span style={styles.moduleLinkTitle(theme)}>{item.title}</span>
-                      <span style={styles.moduleLinkDescription(theme)}>{item.description}</span>
-                    </div>
-                    <div style={styles.moduleLinkStatus}>
-                      <ModuleStatus
-                        status={item.isCompleted ? 'completed' : item.isInProgress ? 'in-progress' : 'locked'}
-                        showIcon={true}
-                        size="small"
-                        animated={false}
-                      />
-                      {!item.isLocked && item.completionPercentage > 0 && (
-                        <span style={styles.progressText(theme)}>{item.completionPercentage}%</span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
+                <h3 style={styles.sectionTitle(theme)} id="modules-section-title">Modules</h3>
+                <div role="list" aria-labelledby="modules-section-title">
+                  {navigationItems.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={item.path}
+                      style={{
+                        ...styles.moduleLink(theme),
+                        ...(isActive(item.path) ? styles.moduleLinkActive(theme) : {}),
+                        ...(item.isLocked ? styles.moduleLinkLocked(theme) : {}),
+                      }}
+                      onClick={(e) => {
+                        if (item.isLocked) {
+                          e.preventDefault()
+                        } else {
+                          onClose()
+                        }
+                      }}
+                      aria-label={`${item.title}: ${item.description}${item.isCompleted ? ' - Completed' : item.isInProgress ? ' - In Progress' : item.isLocked ? ' - Locked' : ''}`}
+                      aria-disabled={item.isLocked}
+                      aria-current={isActive(item.path) ? 'page' : undefined}
+                      role="listitem"
+                      className="touch-target-min"
+                    >
+                      <div style={styles.moduleLinkContent}>
+                        <span style={styles.moduleLinkTitle(theme)}>{item.title}</span>
+                        <span style={styles.moduleLinkDescription(theme)}>{item.description}</span>
+                      </div>
+                      <div style={styles.moduleLinkStatus}>
+                        <ModuleStatus
+                          status={item.isCompleted ? 'completed' : item.isInProgress ? 'in-progress' : 'locked'}
+                          showIcon={true}
+                          size="small"
+                          animated={false}
+                        />
+                        {!item.isLocked && item.completionPercentage > 0 && (
+                          <span style={styles.progressText(theme)} aria-label={`${item.completionPercentage} percent complete`}>
+                            {item.completionPercentage}%
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </nav>
 

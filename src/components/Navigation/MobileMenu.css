@@ -1,20 +1,22 @@
 /**
  * MobileMenu Styles
- * Touch-friendly mobile navigation
+ * Touch-friendly mobile navigation with enhanced accessibility
  */
 
 .mobile-menu__drawer {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Touch-friendly tap targets */
-.mobile-menu__nav a {
-  min-height: 48px;
+/* Touch-friendly tap targets - minimum 44x44px */
+.mobile-menu__nav a,
+.mobile-menu__close {
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* Hover effects for touch devices */
 @media (hover: hover) {
-  .mobile-menu__nav a:hover {
+  .mobile-menu__nav a:hover:not([aria-disabled="true"]) {
     background-color: rgba(0, 0, 0, 0.05);
   }
 
@@ -24,21 +26,73 @@
 }
 
 /* Active state for touch */
-.mobile-menu__nav a:active {
+.mobile-menu__nav a:active:not([aria-disabled="true"]) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Accessibility */
+/* ===========================
+   Accessibility Enhancements
+   =========================== */
+
+/* Drawer focus management */
 .mobile-menu__drawer:focus {
   outline: none;
 }
 
+/* Enhanced focus indicators */
 .mobile-menu__close:focus-visible {
-  outline: 2px solid var(--color-primary-main);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-primary-main, #646cff);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(100, 108, 255, 0.1);
+  border-radius: 4px;
 }
 
 .mobile-menu__nav a:focus-visible {
-  outline: 2px solid var(--color-primary-main);
-  outline-offset: -2px;
+  outline: 3px solid var(--color-primary-main, #646cff);
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 3px rgba(100, 108, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Keyboard navigation mode */
+body.using-keyboard .mobile-menu__nav a:focus,
+body.using-keyboard .mobile-menu__close:focus {
+  outline: 3px solid var(--color-primary-main, #646cff);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.mobile-menu__nav a[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mobile-menu__close:focus-visible,
+  .mobile-menu__nav a:focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu__drawer,
+  .mobile-menu__backdrop {
+    transition: none !important;
+  }
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* Desktop (>= 1024px) - Menu should not be visible */
+@media (min-width: 1024px) {
+  .mobile-menu__backdrop,
+  .mobile-menu__drawer {
+    display: none !important;
+  }
 }

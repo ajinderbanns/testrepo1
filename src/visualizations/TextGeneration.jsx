@@ -138,6 +138,7 @@ const ControlButton = ({ onClick, disabled, children, variant = 'primary', theme
       disabled={disabled}
       whileHover={{ scale: disabled ? 1 : 1.05 }}
       whileTap={{ scale: disabled ? 1 : 0.95 }}
+      className="touch-target-min"
       style={{
         ...variantStyles[variant],
         padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
@@ -150,7 +151,9 @@ const ControlButton = ({ onClick, disabled, children, variant = 'primary', theme
         transition: theme.transitions.default,
         boxShadow: variant === 'primary' ? theme.shadows.small : 'none',
         minWidth: '100px',
+        minHeight: '44px',
       }}
+      type="button"
     >
       {children}
     </motion.button>
@@ -287,12 +290,12 @@ function TextGeneration({
     setCurrentExampleIndex(index)
   }, [handleReset])
 
-  // Container styles
+  // Container styles - responsive
   const containerStyles = {
     width: '100%',
     maxWidth: '900px',
     margin: '0 auto',
-    padding: theme.spacing.xl,
+    padding: theme.spacing.md,
     backgroundColor: theme.colors.surface.base,
     borderRadius: theme.radii.xlarge,
     boxShadow: theme.shadows.large,
@@ -392,6 +395,10 @@ function TextGeneration({
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       style={containerStyles}
+      role="region"
+      aria-label="Text Generation Visualization"
+      aria-live="polite"
+      aria-atomic="false"
     >
       {/* Header */}
       <div style={headerStyles}>

@@ -57,16 +57,19 @@ function Button({
         fontSize: theme.typography.size.bodySmall,
         padding: `${theme.spacing.xs} ${theme.spacing.md}`,
         fontWeight: theme.typography.weight.medium,
+        minHeight: '36px',
       },
       medium: {
         fontSize: theme.typography.size.body,
         padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
         fontWeight: theme.typography.weight.semibold,
+        minHeight: '44px', // Touch target minimum
       },
       large: {
         fontSize: theme.typography.size.bodyLarge,
         padding: `${theme.spacing.md} ${theme.spacing.xl}`,
         fontWeight: theme.typography.weight.bold,
+        minHeight: '52px',
       },
     }
 

@@ -119,17 +119,23 @@ class ActivationParticle {
  * NeuralNetworkViz Component
  */
 const NeuralNetworkViz = ({
-  width = 700,
-  height = 500,
+  width: propWidth,
+  height: propHeight,
   layerSizes = [4, 6, 6, 3],
   autoPlay = true,
   speed = 1,
+  responsive = true,
 }) => {
   const canvasRef = useRef(null)
+  const containerRef = useRef(null)
   const { theme } = useTheme()
   const animConfig = useAnimationConfig()
   const [isPlaying, setIsPlaying] = useState(autoPlay)
   const [hoveredNode, setHoveredNode] = useState(null)
+  const [dimensions, setDimensions] = useState({
+    width: propWidth || 700,
+    height: propHeight || 500,
+  })
   const animationRef = useRef(null)
   
   // Network state
@@ -350,13 +356,54 @@ const NeuralNetworkViz = ({
     setHoveredNode(foundNode)
   }, [calculatePositions])
   
+  // Handle responsive sizing
+  useEffect(() => {
+    if (!responsive || !containerRef.current) return
+
+    const handleResize = () => {
+      const container = containerRef.current
+      if (!container) return
+
+      const containerWidth = container.offsetWidth
+      
+      // Calculate responsive dimensions
+      let newWidth = propWidth || 700
+      let newHeight = propHeight || 500
+
+      // Mobile (< 640px)
+      if (containerWidth < 640) {
+        newWidth = Math.min(containerWidth - 32, 360)
+        newHeight = Math.min(newWidth * 0.75, 300)
+      }
+      // Tablet (640px - 1024px)
+      else if (containerWidth < 1024) {
+        newWidth = Math.min(containerWidth - 48, 600)
+        newHeight = Math.min(newWidth * 0.8, 450)
+      }
+      // Desktop (>= 1024px)
+      else {
+        newWidth = Math.min(containerWidth - 64, propWidth || 700)
+        newHeight = propHeight || 500
+      }
+
+      setDimensions({ width: newWidth, height: newHeight })
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [responsive, propWidth, propHeight])
+
   // Setup canvas and animation
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     
-    canvas.width = width
-    canvas.height = height
+    canvas.width = dimensions.width
+    canvas.height = dimensions.height
     
     const fps = animConfig.targetFPS
     animationRef.current = createRAF(draw, fps)
@@ -367,13 +414,13 @@ const NeuralNetworkViz = ({
         animationRef.current.stop()
       }
     }
-  }, [width, height, draw, animConfig.targetFPS])
+  }, [dimensions.width, dimensions.height, draw, animConfig.targetFPS])
   
   const containerStyle = {
     width: '100%',
-    maxWidth: `${width}px`,
+    maxWidth: responsive ? '100%' : `${dimensions.width}px`,
     margin: '0 auto',
-    padding: theme.spacing.lg,
+    padding: theme.spacing.md,
     backgroundColor: animConfig.colors.background,
     borderRadius: theme.radii.large,
     border: `1px solid ${animConfig.colors.border}`,
@@ -422,7 +469,7 @@ const NeuralNetworkViz = ({
   }
   
   return (
-    <div style={containerStyle}>
+    <div ref={containerRef} style={containerStyle} role="region" aria-label="Neural Network Visualization">
       <div style={titleStyle}>Neural Network Visualization</div>
       
       <div style={canvasContainerStyle}>
@@ -430,6 +477,8 @@ const NeuralNetworkViz = ({
           ref={canvasRef}
           style={{ display: 'block', width: '100%', height: 'auto', cursor: 'pointer' }}
           onMouseMove={handleMouseMove}
+          role="img"
+          aria-label="Interactive neural network diagram showing layers and connections"
         />
       </div>
       
@@ -442,6 +491,8 @@ const NeuralNetworkViz = ({
           }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Trigger network activation"
+          className="touch-target-min"
         >
           Trigger Activation
         </motion.button>
@@ -451,6 +502,9 @@ const NeuralNetworkViz = ({
           onClick={() => setIsPlaying(!isPlaying)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label={isPlaying ? 'Pause automatic activation' : 'Play automatic activation'}
+          aria-pressed={isPlaying}
+          className="touch-target-min"
         >
           {isPlaying ? 'Pause' : 'Play'} Auto
         </motion.button>
@@ -465,6 +519,7 @@ NeuralNetworkViz.propTypes = {
   layerSizes: PropTypes.arrayOf(PropTypes.number),
   autoPlay: PropTypes.bool,
   speed: PropTypes.number,
+  responsive: PropTypes.bool,
 }
 
 export default NeuralNetworkViz
