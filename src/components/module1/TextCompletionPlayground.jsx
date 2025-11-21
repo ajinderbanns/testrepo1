@@ -17,6 +17,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
+import { useContent } from '../../hooks/useContent'
 import { getExamplesByGender } from '../../data/module1Examples'
 import SimulatedTextGenerator from './SimulatedTextGenerator'
 import Button from '../ui/Button'
@@ -52,6 +53,7 @@ const saveCustomPrompts = (prompts) => {
 
 function TextCompletionPlayground() {
   const { theme, themeName } = useTheme()
+  const { getModuleContent, getUIContent } = useContent()
   const [customPrompt, setCustomPrompt] = useState('')
   const [currentPrompt, setCurrentPrompt] = useState('')
   const [selectedExample, setSelectedExample] = useState(null)
@@ -61,6 +63,10 @@ function TextCompletionPlayground() {
 
   const gender = themeName === 'female' ? 'female' : 'male'
   const examples = getExamplesByGender(gender, 'completion')
+  
+  // Get content-aware UI text
+  const uiContent = getUIContent()
+  const moduleContent = getModuleContent(1)
 
   // Load custom prompts on mount
   useEffect(() => {
@@ -137,7 +143,8 @@ function TextCompletionPlayground() {
           color: theme.colors.text.secondary,
           lineHeight: '1.6',
         }}>
-          Type a prompt or try an example to see how an LLM generates text token-by-token.
+          {moduleContent.sections?.textGeneration?.description || 
+           'Type a prompt or try an example to see how an LLM generates text token-by-token.'}
         </p>
       </div>
 

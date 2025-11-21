@@ -10,12 +10,17 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
+import { useContent } from '../../hooks/useContent'
 import { tokenizationContent } from '../../data/module2Content'
 import TokenizationViz from './TokenizationViz'
 
 function TokenizationSection() {
   const { theme, themeName } = useTheme()
-  const content = tokenizationContent[themeName] || tokenizationContent.male
+  const { getModuleContent } = useContent()
+  
+  // Use content from context with fallback to existing data
+  const moduleContent = getModuleContent(2)
+  const content = moduleContent.sections?.tokenization || tokenizationContent[themeName] || tokenizationContent.male
 
   const containerStyle = {
     maxWidth: '900px',

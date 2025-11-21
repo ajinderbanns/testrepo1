@@ -7,6 +7,7 @@
  */
 
 export { useTheme } from './useTheme'
+export { useContent } from './useContent'
 export { useGenderPreference } from './useGenderPreference'
 export { useProgress } from './useProgress'
 export { useModuleProgress } from './useModuleProgress'

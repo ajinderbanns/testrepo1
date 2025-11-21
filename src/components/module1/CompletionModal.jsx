@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../../hooks/useTheme'
+import { useContent } from '../../hooks/useContent'
 import Modal from '../ui/Modal'
 
 /**
@@ -71,8 +72,13 @@ function CompletionModal({
   nextModuleId = null,
 }) {
   const { theme } = useTheme()
+  const { getGamificationContent } = useContent()
   const navigate = useNavigate()
   const [showConfetti, setShowConfetti] = useState(false)
+  
+  // Get content-aware celebration text
+  const gamification = getGamificationContent()
+  const celebrationText = gamification.celebrations?.moduleComplete
 
   // Trigger confetti animation when modal opens
   useEffect(() => {
@@ -195,7 +201,7 @@ function CompletionModal({
             marginBottom: theme.spacing.md,
           }}
         >
-          Congratulations!
+          {celebrationText?.title || 'Congratulations!'}
         </motion.h2>
 
         {/* Completion message */}
@@ -210,7 +216,7 @@ function CompletionModal({
             lineHeight: '1.6',
           }}
         >
-          You've completed <strong>{moduleName}</strong>! 
+          {celebrationText?.message || `You've completed ${moduleName}!`}
           {nextModuleId && ' Ready to continue to the next module?'}
         </motion.p>
 

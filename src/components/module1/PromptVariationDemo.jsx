@@ -16,6 +16,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
+import { useContent } from '../../hooks/useContent'
 import { getExamplesByGender } from '../../data/module1Examples'
 import Card from '../ui/Card'
 import Button from '../ui/Button'
@@ -178,12 +179,14 @@ const VariationCard = ({ variation, index, theme, isRevealed }) => {
  */
 function PromptVariationDemo() {
   const { theme, themeName } = useTheme()
+  const { getUIContent } = useContent()
   const [selectedExampleIndex, setSelectedExampleIndex] = useState(0)
   const [isRevealed, setIsRevealed] = useState(false)
 
   const gender = themeName === 'female' ? 'female' : 'male'
   const examples = getExamplesByGender(gender, 'variations')
   const currentExample = examples[selectedExampleIndex]
+  const uiContent = getUIContent()
 
   /**
    * Handle example selection

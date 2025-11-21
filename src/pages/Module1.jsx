@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTheme } from '../hooks/useTheme'
+import { useContent } from '../hooks/useContent'
 import { useModuleProgress } from '../hooks/useModuleProgress'
 import { useProgress } from '../hooks/useProgress'
 import {
@@ -24,10 +25,15 @@ import '../styles/modules/Module1Playgrounds.css'
 
 function Module1() {
   const { theme } = useTheme()
+  const { getModuleContent, getUIContent } = useContent()
   const { sectionPath } = useParams()
   const navigate = useNavigate()
   const { markSectionComplete, completionPercentage, status } = useModuleProgress(1)
   const { overallCompletion, isModuleCompleted } = useProgress()
+  
+  // Get content for Module 1
+  const moduleContent = getModuleContent(1)
+  const uiContent = getUIContent()
   
   const [showCompletionModal, setShowCompletionModal] = useState(false)
   const [showMobileNav, setShowMobileNav] = useState(false)
@@ -138,10 +144,8 @@ function Module1() {
               lineHeight: '1.6',
               marginBottom: theme.spacing.xl,
             }}>
-              Learn the basics of Large Language Models through interactive examples 
-              and hands-on exercises. Explore how LLMs generate text, understand 
-              the importance of prompt engineering, and build your intuition about 
-              how these powerful AI systems work.
+              {moduleContent.intro?.description ||
+               'Learn the basics of Large Language Models through interactive examples and hands-on exercises.'}
             </p>
             <div style={{
               padding: theme.spacing.lg,
