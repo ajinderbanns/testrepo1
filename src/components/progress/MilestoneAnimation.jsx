@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
+import { useContent } from '../../hooks/useContent'
 
 /**
  * MilestoneAnimation Component
@@ -29,9 +30,9 @@ import { useTheme } from '../../hooks/useTheme'
 function MilestoneAnimation({
   show = false,
   type = 'success',
-  title = 'Achievement Unlocked!',
+  title = null,
   message = null,
-  icon = '🎉',
+  icon = null,
   duration = 3000,
   showConfetti = true,
   onComplete = null,
@@ -40,7 +41,36 @@ function MilestoneAnimation({
   ...props
 }) {
   const { theme } = useTheme()
+  const { getGamificationContent } = useContent()
   const [particles, setParticles] = useState([])
+  
+  // Get content-aware celebration text
+  const gamification = getGamificationContent()
+  const celebrations = gamification.celebrations || {}
+  
+  // Determine which celebration content to use
+  const getCelebrationContent = () => {
+    const celebrationMap = {
+      success: celebrations.sectionComplete,
+      achievement: celebrations.moduleComplete,
+      milestone: celebrations.moduleComplete,
+      levelUp: celebrations.allComplete,
+    }
+    
+    const celebration = celebrationMap[type] || celebrations.sectionComplete || {
+      title: 'Achievement Unlocked!',
+      message: 'Great work!',
+      icon: '🎉',
+    }
+    
+    return {
+      title: title || celebration.title,
+      message: message || celebration.message,
+      icon: icon || celebration.icon,
+    }
+  }
+  
+  const celebrationContent = getCelebrationContent()
 
   // Generate confetti particles
   useEffect(() => {
@@ -259,7 +289,7 @@ function MilestoneAnimation({
                 display: 'inline-block',
               }}
             >
-              {icon}
+              {celebrationContent.icon}
             </motion.div>
 
             {/* Title */}
@@ -273,11 +303,11 @@ function MilestoneAnimation({
                 fontFamily: theme.typography.family.primary,
               }}
             >
-              {title}
+              {celebrationContent.title}
             </motion.h2>
 
             {/* Message */}
-            {message && (
+            {celebrationContent.message && (
               <motion.p
                 variants={textVariants}
                 style={{
@@ -287,7 +317,7 @@ function MilestoneAnimation({
                   margin: 0,
                 }}
               >
-                {message}
+                {celebrationContent.message}
               </motion.p>
             )}
 
